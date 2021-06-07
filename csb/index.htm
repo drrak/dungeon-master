@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CSB Level _</title>
+<meta name="description" content="Chaos Strikes Back - interactive maps by 3dh">
+<meta name="keywords" content="chaos strikes back, csb, interactive, maps, 3dh">
+<link rel="icon" href="../file/ico.ico">
+<script src="csb-js.js"></script>
+<style>
+html,body{font:12px "Courier New",serif;color:#b6b6b6;position:absolute;margin:0 auto;padding:0;background-color:#484848;}
+img{border:none;}
+#lv0,#lv1,#lv2,#lv3,#lv4,#lv5,#lv6,#lv7,#lv8,#lv9,#lv10,#lv11,#lv12,#lv13{display:none;border-bottom-style:dashed;border-width:1px;}
+#inf{border-bottom-style:dashed;border-top-style:dashed;border-width:1px;}
+a:link{color:#b6b6b6;text-decoration:none;}
+a:visited{color:#a0a0a0;text-decoration:none;}
+a:hover, a:active{color:#b6b6b6;text-decoration:underline;}
+#mapa{
+position:fixed;
+left:0px;
+top:0px;
+background:url(../file/csbmap.png) no-repeat;
+width:477px;
+height:477px;
+}
+#cel{position:absolute;left:-22px;top:-22px;}
+#txt{position:relative;background-color:#484848;width:555px;top:294px;padding:4px 10px;}
+#champ{
+border-bottom:5px solid #484848;
+display:inline-block;
+background:url(../file/csb-champions.png) no-repeat;
+width:64px;
+height:58px;
+}
+</style>
+</head>
+<body>
+<div onmouseup="GetCoordinates(lv,event.clientX,event.clientY)" id="mapa">
+<img id="cel" src="../file/p.png" width="15" height="15" alt="c" />
+</div>
+<div id="txt">
+<div id="inf">
+<p id="map"><a href="?4,31,26">Chaos Strikes Back Compendium</a></p>
+</div>
+<div id="lv0">
+<p>ITEMS</p>
+<p>
+<a href="?0,23,16">01 (23,16) Iron Key</a><br>
+<a href="?0,22,17">02 (22,17) Iron Key</a><br>
+<a href="?0,24,17">03 (24,17) Iron Key</a><br>
+<a href="?0,23,18">04 (23,18) Iron Key</a><br>
+<a href="?0,20,19">05 (20,19) Shank</a><br>
+<a href="?0,23,28">06 (23,28) Gor Coin</a><br>
+<a href="?0,22,30">07 (22,30) Gor Coin</a><br>
+<a href="?0,23,32">08 (23,32) Shank</a><br>
+<a href="?0,27,31">09 (27,31) Bread</a><br>
+<a href="?0,27,27">10 (27,27) Sceptre Of Lyf</a><br>
+<a href="?0,34,36">11 (34,36) Gor Coin</a><br>
+<a href="?0,36,29">12 (36,29) Gor Coin</a><br>
+<a href="?0,38,27">13 (38,27) Cheese</a><br>
+<a href="?0,40,35">14 (40,35) Shank</a><br>
+<a href="?0,44,37">15 (44,37) Gor Coin</a><br>
+<a href="?0,44,38">16 (44,38) Bread, Corn</a><br>
+<a href="?0,48,38">17 (48,38) Rock (2), Stick</a><br>
+<a href="?0,47,39">18 (47,39) Gor Coin</a><br>
+<a href="?0,41,42">19 (41,42) Boots Of Speed</a><br>
+<a href="?0,29,44">20 (29,44) Ful Bomb (2)</a><br>
+<a href="?0,48,42">21 (48,42) Boots Of Speed</a><br>
+<a href="?0,42,23">22 (42,23) Dragon Fang</a><br>
+<a href="?0,44,33">23 (44,33) Gor Coin</a><br>
+<a href="?0,33,33">24 (33,33) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?0,38,31">25 (38,31) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?0,43,40">26 (43,40) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?0,23,17">27 (23,17) Some randomly placed items can be here (in one of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?0,20,38">I01 (20,38) "Fulya pit"</a><br>
+<a href="?0,35,38">I02 (35,38) "Demon Chamber"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?0,47,24">L01 (47,24) Skeleton Key, Lock Picks</a><br>
+<a href="?0,45,20">L02 (45,20) Onyx Key</a><br>
+<a href="?0,32,20">L03 (32,20) Square Key</a><br>
+<a href="?0,35,23">L04 (35,23) Onyx Key</a><br>
+<a href="?0,25,24">L05 (25,24) Iron Key</a><br>
+<a href="?0,28,27">L06 (28,27) Iron Key</a><br>
+<a href="?0,19,24">L07 (19,24) Ra Key, Zokathra Spell</a><br>
+<a href="?0,19,25">L08 (19,25) Ra Key, Zokathra Spell</a><br>
+<a href="?0,46,39">L09 (46,39) Key Of B (4), Lock Picks (2)</a><br>
+<a href="?0,31,40">L10 (31,40) Master Key</a><br>
+<a href="?0,32,43">L11 (32,43) Topaz Key, Master Key, Lock Picks</a><br>
+<a href="?0,24,29">L12 (24,29) Iron Key, Lock Picks</a><br>
+<a href="?0,26,29">L13 (26,29) Gor Coin</a><br>
+<a href="?0,38,42">L14 (38,42) Iron Key, Lock Picks</a><br>
+<a href="?0,31,37">L15 (31,37) Skeleton Key</a><br>
+<a href="?0,30,33">L16 (30,33) Iron Key</a><br>
+<a href="?0,33,33">L17 (33,33) Iron Key</a><br>
+<a href="?0,38,31">L18 (38,31) Gor Coin</a><br>
+<a href="?0,39,32">L19 (39,32) Gor Coin</a><br>
+<a href="?0,38,33">L20 (38,33) Gor Coin</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?0,47,24">A. A Skeleton Key or Lock Picks (used 7 times) will open the door but Lock Picks will also activate the Demon generator.</a><br>
+<a href="?0,46,39">B. Two Keys Of B or Lock Picks (used twice) will open the door. Four Keys Of B are required to open both the door and the wall.</a><br>
+<a href="?0,32,43">C. A Topaz Key, a Master Key or Lock Picks will open the door, but a Topaz Key will also deactivate the fireball holes.</a><br>
+<a href="?0,17,30">D. A Crown Of Nerra or an Orange Gem in your inventory will prevent Zytaz generation around (00,25,35) when walking at (00,17,30).</a><br>
+<a href="?0,26,36">E. A Pendant Feral in your inventory will prevent Zytaz generation at (00,25,34), (00,24,35), (00,26,35) and (00,25,36) when walking at (00,25,35).</a><br>
+<a href="?0,41,18">F. A Dexhelm in your inventory will prevent Demon generation at (00,47,21) when walking at (00,41,18).</a><br>
+<a href="?0,23,20">G. A Flamebain in your inventory will prevent Fireball launch at (00,23,29) when walking at (00,23,20).</a><br>
+<a href="?0,32,18">H. Powertowers in your inventory will prevent Demon generation at (00,34,20) when walking at (00,31,18).</a><br>
+<a href="?0,41,41">I. The door will open if you have Boots Of Speed in your inventory.</a><br>
+<a href="?0,31,36">J. An Ekkhard Cross in your inventory will prevent generation of Demons at (00,35,34) when walking at (00,31,36).</a><br>
+<a href="?0,29,15">K. A Corbum in your inventory will open the door at (00,22,14) when walking at (00,29,15).</a><br>
+<a href="?0,29,19">L. A Boulder in your inventory will open the door.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?0,17,18">01 (17,18) Black Flame</a><br>
+<a href="?0,17,19">02 (17,19) Black Flame</a><br>
+<a href="?0,17,20">03 (17,20) Black Flame</a><br>
+<a href="?0,17,21">04 (17,21) Black Flame</a><br>
+<a href="?0,25,34">05 (25,34) Zytaz Generator (1-4)</a><br>
+<a href="?0,24,35">06 (24,35) Zytaz Generator (1-4)</a><br>
+<a href="?0,26,35">07 (26,35) Zytaz Generator (1-4)</a><br>
+<a href="?0,25,36">08 (25,36) Zytaz Generator (1-4)</a><br>
+<a href="?0,35,34">09 (35,34) Demon Generator (1)</a><br>
+<a href="?0,39,42">10 (39,42) Demon [Master Key]</a><br>
+<a href="?0,38,42">11 (38,42) Demon Generator (2)</a><br>
+<a href="?0,33,42">12 (33,42) Demon (4)</a><br>
+<a href="?0,33,40">13 (33,40) Demon Generator (2)</a><br>
+<a href="?0,34,39">14 (34,39) Demon (2)</a><br>
+<a href="?0,25,43">15 (25,43) Lord Chaos Generator (1)</a><br>
+<a href="?0,19,43">16 (19,43) Worm Generator (1)</a><br>
+<a href="?0,17,40">17 (17,40) Grey Lord</a><br>
+<a href="?0,33,16">18 (33,16) Demon [Square Key]</a><br>
+<a href="?0,34,20">19 (34,20) Demon Generator (1)</a><br>
+<a href="?0,42,20">20 (42,20) Worm Generator (2)</a><br>
+<a href="?0,47,21">21 (47,21) Demon Generator (1)</a><br>
+<a href="?0,46,31">22 (46,31) Demon [Iron Key]</a><br>
+<a href="?0,46,32">23 (46,32) Demon</a><br>
+<a href="?0,48,32">24 (48,32) Demon</a>
+</p>
+</div>
+<div id="lv1">
+<p>ITEMS</p>
+<p>
+<a href="?1,26,36">01 (26,36) Cheese</a><br>
+<a href="?1,17,25">02 (17,25) Ashes</a><br>
+<a href="?1,8,21">03 (08,21) Dragon Steak</a><br>
+<a href="?1,9,22">04 (09,22) Mithral Mail, Mithral Aketon</a><br>
+<a href="?1,10,21">05 (10,21) Magical Box (Green)</a><br>
+<a href="?1,9,20">06 (09,20) Empty Flask</a><br>
+<a href="?1,8,13">07 (08,13) Magical Box (Blue)</a><br>
+<a href="?1,12,7">08 (12,07) Blue Gem</a><br>
+<a href="?1,17,8">09 (17,08) Bread (2)</a><br>
+<a href="?1,13,14">10 (13,14) Magical Box (Green)</a><br>
+<a href="?1,20,19">11 (20,19) Blue Gem</a><br>
+<a href="?1,31,22">12 (31,22) Corbum</a><br>
+<a href="?1,30,23">13 (30,23) Corbum</a><br>
+<a href="?1,31,24">14 (31,24) Corbum</a><br>
+<a href="?1,32,23">15 (32,23) Corbum</a><br>
+<a href="?1,21,28">16 (21,28) Sandals, Fine Robe (Legs), Fine robe (Body), Crown Of Nerra</a><br>
+<a href="?1,30,9">17 (30,09) Iron Key</a><br>
+<a href="?1,9,21">18 (09,21) Some randomly placed items can be here (in one of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?1,21,9">I01 (21,09) "None shall pass the corridor of fire"</a><br>
+<a href="?1,30,27">I02 (30,27) "Eye lie"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?1,17,33">L01 (17,33) Skeleton Key</a><br>
+<a href="?1,07,22">L02 (07,22) Skeleton Key</a><br>
+<a href="?1,12,22">L03 (12,22) Gold Key, Lock Picks</a><br>
+<a href="?1,11,21">L04 (11,21) Gold Key, Lock Picks</a><br>
+<a href="?1,23,8">L05 (23,08) Blue Gem</a><br>
+<a href="?1,24,23">L06 (24,23) Blue Gem</a><br>
+<a href="?1,30,29">L07 (30,29) Iron Key</a><br>
+<a href="?1,29,18">L08 (29,18) Skeleton Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?1,11,21">A. A Gold Key or Lock Picks will open the door but Lock Picks will also open a pit under you.</a><br>
+<a href="?1,36,19">B. The door will open if you have Corbum in your inventory.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?1,30,34">01 (30,34) Stone golem Generator (1)</a><br>
+<a href="?1,17,28">02 (17,28) Hellhound</a><br>
+<a href="?1,13,25">03 (13,25) Hellhound</a><br>
+<a href="?1,16,21">04 (16,21) Hellhound Generator (1)</a><br>
+<a href="?1,9,23">05 (09,23) Stone Golem</a><br>
+<a href="?1,13,21">06 (13,21) Hellhound (2)</a><br>
+<a href="?1,8,13">07 (08,13) Mummy</a><br>
+<a href="?1,28,11">08 (28,11) Hellhound Generator (1)</a><br>
+<a href="?1,30,9">09 (30,09) Stone golem Generator (1)</a>
+</p>
+</div>
+<div id="lv2">
+<p>ITEMS</p>
+<p>
+<a href="?2,11,23">01 (11,23) Water Flask</a><br>
+<a href="?2,10,18">02 (10,18) Sapphire Key</a><br>
+<a href="?2,15,29">03 (15,29) Cross Key</a><br>
+<a href="?2,20,23">04 (20,23) Boulder (3), Rock (2), Stone Club</a><br>
+<a href="?2,19,15">05 (19,15) Storm Ring, Elven Boots</a><br>
+<a href="?2,8,13">06 (08,13) Speedbow</a><br>
+<a href="?2,20,11">07 (20,11) Slayer (4)</a><br>
+<a href="?2,20,9">08 (20,09) Rope</a><br>
+<a href="?2,31,22">09 (31,22) Water</a><br>
+<a href="?2,30,23">10 (30,23) Dragon Steak</a><br>
+<a href="?2,32,23">11 (32,23) Dragon Steak</a><br>
+<a href="?2,31,24">12 (31,24) Dragon Steak</a><br>
+<a href="?2,12,8">13 (12,08) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?2,14,20">14 (14,20) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?2,31,23">15 (31,23) Some randomly placed items can be here (in one or two of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?2,12,23">I01 (12,23) "Fighter charge"</a><br>
+<a href="?2,13,28">I02 (13,28) "Value in exchange for valuables"</a><br>
+<a href="?2,17,22">I03 (17,22) "Trust me... Enter the pit"</a><br>
+<a href="?2,20,28">I04 (20,28) "Dain"</a><br>
+<a href="?2,22,25">I05 (22,25) "Ku"</a><br>
+<a href="?2,23,30">I06 (23,30) "Dead end"</a><br>
+<a href="?2,20,17">I07 (20,17) "Ros"</a><br>
+<a href="?2,11,13">I08 (11,13) "Launch it catch it snatch it"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?2,13,28">L01 (13,28) Cross Key, Lock Picks</a><br>
+<a href="?2,19,28">L02 (19,28) Ruby Key</a><br>
+<a href="?2,23,25">L03 (23,25) Solid Key</a><br>
+<a href="?2,20,18">L04 (20,18) Emerald Key</a><br>
+<a href="?2,14,10">L05 (14,10) Gold Key, Lock Picks</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?2,14,10">A. A Gold Key will open the door but Lock Picks will open a pit dropping you into the Death Row.</a><br>
+<a href="?2,31,30">B. Let the Deth Knights corner you because only them can activate the pad that opens the wall.</a><br>
+<a href="?2,16,20">C. How to close the pit at (02,16,20) (based on hints by Paul R. Stevens)</a><br><br>
+1. Step on the pressure pad at (03,31,23). This will activate the teleporter at (03,06,10) which will teleport a Rock to (03,06,11). This will also close the walls at (03,20,23) and (03,29,29).<br><br>
+2. Step on the stairs at (03,09,24). This will open the False Wall at (03,29,29).<br><br>
+3. Go to (03,22,22) and use War Cry to corner a Skeleton at (03,21,23). Then quickly press the button at (03,22,22). It will activate the teleporter at (03,21,23), transporting the Skeleton to (03,21,25) where he will be killed by Lightning Bolts shot from (03,29,27) and teleported to (03,21,25). He will drop its Falchion on the floor which will open the door at (03,21,24).<br>If the false wall at (03,29,29) is closed when you press the button, the Lightning Bolts will be blocked and the Skeleton still alive. However, you can kill him with Des Ven spells through the door.<br><br>
+4. Walk to (03,21,25) and present any item to the Eye Switch. This will activate the teleporter at (03,06,11) that will transport the Rock to (02,08,28). The pressure pad there will then permanently close the pit at (02,16,20).
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?2,10,22">01 (10,22) Black Flame Generator (1)</a><br>
+<a href="?2,10,21">02 (10,21) Black Flame Generator (1)</a><br>
+<a href="?2,11,21">03 (11,21) Black Flame Generator (1)</a><br>
+<a href="?2,12,21">04 (12,21) Black Flame</a><br>
+<a href="?2,10,20">05 (10,20) Black Flame Generator (1)</a><br>
+<a href="?2,11,20">06 (11,20) Black Flame</a><br>
+<a href="?2,10,19">07 (10,19) Black Flame</a><br>
+<a href="?2,11,19">08 (11,19) Black Flame Generator (1)</a><br>
+<a href="?2,10,18">09 (10,18) Black Flame</a><br>
+<a href="?2,11,24">10 (11,24) Rock Pile Generator (2)</a><br>
+<a href="?2,15,21">11 (15,21) Demon Generator (1)</a><br>
+<a href="?2,15,22">12 (15,22) Demon Generator (1)</a><br>
+<a href="?2,19,23">13 (19,23) Stone Golem Generator (1)</a><br>
+<a href="?2,14,26">14 (14,26) Black Flame Generator (1)</a><br>
+<a href="?2,16,26">15 (16,26) Black Flame Generator (1)</a><br>
+<a href="?2,18,28">16 (18,28) Black Flame</a><br>
+<a href="?2,12,30">17 (12,30) Demon</a><br>
+<a href="?2,24,30">18 (24,30) Deth Knight Generator (2)</a><br>
+<a href="?2,22,9">19 (22,09) Demon</a><br>
+<a href="?2,17,11">20 (17,11) Demon (2)</a><br>
+<a href="?2,8,8">21 (08,08) Giggler</a><br>
+<a href="?2,7,9">22 (07,09) Giggler</a><br>
+<a href="?2,8,9">23 (08,09) Giggler</a><br>
+<a href="?2,9,9">24 (09,09) Giggler</a><br>
+<a href="?2,8,10">25 (08,10) Giggler</a>
+</p>
+</div>
+<div id="lv3">
+<p>ITEMS</p>
+<p>
+<a href="?3,5,8">01 (05,08) Chest [Eye Of Time], Chest [Powertowers], Chest [Ful Bomb (2), Gold Key]</a><br>
+<a href="?3,6,10">02 (06,10) Rock</a><br>
+<a href="?3,5,12">03 (05,12) Dragon Steak, Gold Key, Magical Box (Blue), Magical Box (Green), Slayer, Sar Shield, Armet, Leg Plate, Mace Of Order, Serpent Staff, Boots Of Speed</a><br>
+<a href="?3,9,22">04 (09,22) Rock</a><br>
+<a href="?3,16,10">05 (16,10) Square Key</a><br>
+<a href="?3,20,13">06 (20,13) Square Key</a><br>
+<a href="?3,26,10">07 (26,10) Square Key</a><br>
+<a href="?3,12,14">08 (12,14) Dragon Steak</a><br>
+<a href="?3,19,18">09 (19,18) Rock (2)</a><br>
+<a href="?3,20,19">10 (20,19) Rock</a><br>
+<a href="?3,22,18">11 (22,18) Rock</a><br>
+<a href="?3,22,17">12 (22,17) Rock</a><br>
+<a href="?3,20,22">13 (20,22) Rock</a><br>
+<a href="?3,23,30">14 (23,30) Shield Of Ra</a><br>
+<a href="?3,17,30">15 (17,30) Gor Coin</a><br>
+<a href="?3,16,31">16 (16,31) Gor Coin</a><br>
+<a href="?3,15,30">17 (15,30) Gor Coin</a><br>
+<a href="?3,16,29">18 (16,29) Gor Coin</a><br>
+<a href="?3,9,31">19 (09,31) Scroll ("Fighters charge")</a><br>
+<a href="?3,13,23">20 (13,23) Bones</a><br>
+<a href="?3,12,25">21 (12,25) Bones</a><br>
+<a href="?3,36,23">22 (36,23) Gold Key</a><br>
+<a href="?3,34,9">23 (34,09) Emerald Key</a><br>
+<a href="?3,25,19">24 (25,19) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?3,16,30">25 (16,30) Some randomly placed items can be here (in one of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?3,7,24">I01 (07,24) "Diabolical Demon Director"</a><br>
+<a href="?3,23,25">I02 (23,25) "Neta"</a><br>
+<a href="?3,21,6">I03 (21,06) "Dragon den"</a><br>
+<a href="?3,26,13">I04 (26,13) "Do you have the power"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?3,6,22">L01 (06,22) Sapphire Key</a><br>
+<a href="?3,6,18">L02 (06,18) Gor Coin</a><br>
+<a href="?3,10,28">L03 (10,28) Cross Key</a><br>
+<a href="?3,11,33">L04 (11,33) Gold Key</a><br>
+<a href="?3,14,30">L05 (14,30) Gold Key</a><br>
+<a href="?3,16,28">L06 (16,28) Gold Key</a><br>
+<a href="?3,20,30">L07 (20,30) Gold Key, Lock Picks</a><br>
+<a href="?3,21,25">L08 (21,25) Tourquoise Key</a><br>
+<a href="?3,22,21">L09 (22,21) Gold Key, Lock Picks</a><br>
+<a href="?3,8,9">L10 (08,09) Square Key</a><br>
+<a href="?3,20,8">L11 (20,08) Square Key, Lock Picks</a><br>
+<a href="?3,26,13">L12 (26,13) Powertowers</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?3,21,24">A. A Falchion on the floor is required to open the door at (21,24).</a> See <a href="?7,7,28">Chaos Strikes Back Level 02</a> notes for more information on how to do this.<br>
+<a href="?3,23,30">B. Taking the Shield Of Ra at (23,30) will launch Fireballs from (25,30).</a><br>
+<a href="?3,14,14">C. Kill the Red Dragon while it is standing at (10,14) or (10,16). This will close a pit at (13,14) or (13,16). Then get the Dragon Steak at (12,14) and throw it to (10,15) to close the pit at (11,15).</a><br>
+<a href="?3,13,24">D. The pit at (12,24) will open if you walk on it 8 times. The other pit at (15,25) will open if you walk on it 10 times.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?3,7,9">01 (07,09) Skeleton [Square Key]</a><br>
+<a href="?3,16,8">02 (16,08) Dragon</a><br>
+<a href="?3,17,12">03 (17,12) Dragon</a><br>
+<a href="?3,22,13">04 (22,13) Dragon Generator (1)</a><br>
+<a href="?3,25,12">05 (25,12) Dragon</a><br>
+<a href="?3,26,8">06 (26,08) Dragon</a><br>
+<a href="?3,10,15">07 (10,15) Dragon</a><br>
+<a href="?3,16,16">08 (16,16) Mummy Generator (1-4)</a><br>
+<a href="?3,19,18">09 (19,18) Skeleton Generator (1)</a><br>
+<a href="?3,24,26">10 (24,26) Skeleton</a><br>
+<a href="?3,20,28">11 (20,28) Giggler</a><br>
+<a href="?3,15,23">12 (15,23) Dragon</a><br>
+<a href="?3,29,25">13 (29,25) Dragon</a><br>
+<a href="?3,34,26">14 (34,26) Dragon</a><br>
+<a href="?3,29,21">15 (29,21) Dragon</a><br>
+<a href="?3,33,20">16 (33,20) Dragon [Gold Key]</a><br>
+<a href="?3,35,17">17 (35,17) Dragon</a><br>
+<a href="?3,32,14">18 (32,14) Dragon</a><br>
+<a href="?3,35,11">19 (35,11) Dragon</a>
+</p>
+</div>
+<div id="lv4">
+<p>Note: The small map in the bottom is for the Atari ST version (as well as Chaos Strikes Back for Windows and Linux). Walking at (<a href="?4,35,35">35,16</a>) with a Green Gem in your inventory will open the wall at (<a href="?4,32,35">32,16</a>). Use Lock Picks in the Lock to open the two other walls.</p>
+<p>ITEMS</p>
+<p>
+<a href="?4,31,26">01 (31,26) Dagger, Torch (2)</a><br>
+<a href="?4,29,27">02 (29,27) Storm (Full)</a><br>
+<a href="?4,34,27">03 (34,27) Magical Box (Green)</a><br>
+<a href="?4,34,28">04 (34,28) Magical Box (Blue), Magical Box (Green) (2)</a><br>
+<a href="?4,30,23">05 (30,23) Torch</a><br>
+<a href="?4,31,23">06 (31,23) Chest [Tattered Shirt, Robe (Legs), Sandals, Blue Pants, Tunic, Tattered Pants, Silk Shirt, Tabard]</a><br>
+<a href="?4,33,24">07 (33,24) Gor Coin</a><br>
+<a href="?4,29,22">08 (29,22) Gor Coin</a><br>
+<a href="?4,34,22">09 (34,22) Torch</a><br>
+<a href="?4,28,20">10 (28,20) Leather Boots</a><br>
+<a href="?4,29,19">11 (29,19) Rope, Compass, Scroll (Magic Map)</a><br>
+<a href="?4,32,19">12 (32,19) Ven Potion</a><br>
+<a href="?4,32,18">13 (32,18) Ful Bomb (2), Ven Potion (2)</a><br>
+<a href="?4,36,22">14 (36,22) Leg Mail, Hosen, Mail Aketon, Casque'n Coif</a><br>
+<a href="?4,21,21">15 (21,21) Scroll ("No creature", or the name of the creature in front of you)</a><br>
+<a href="?4,24,28">16 (24,28) Empty Flask</a><br>
+<a href="?4,17,28">17 (17,28) Claw Bow</a><br>
+<a href="?4,18,27">18 (18,27) Staff Of Claws</a><br>
+<a href="?4,16,27">19 (16,27) Staff Of Irra</a><br>
+<a href="?4,17,26">20 (17,26) Sword</a><br>
+<a href="?4,18,26">21 (18,26) Dragon Steak, Shank, Cheese, Bread, Corn, Apple</a><br>
+<a href="?4,15,26">22 (15,26) Axe, Mace</a><br>
+<a href="?4,20,27">23 (20,27) Water, Cheese, Teowand, Ful Bomb</a><br>
+<a href="?4,20,25">24 (20,25) Vorpal Blade, Vi Potion, Storm Ring, Ven Potion, Ful Bomb, Cheese</a><br>
+<a href="?4,22,25">25 (22,25) Ven Potion (4), Iron Key, Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?4,10,15">26 (10,15) Flamebain</a><br>
+<a href="?4,10,8">27 (10,08) Bread (2), Water Flask</a><br>
+<a href="?4,28,17">28 (28,17) Iron Key</a><br>
+<a href="?4,25,10">29 (25,10) Chest [Empty Flask, Magical Box (Green), Ven Potion, Gor Coin]</a><br>
+<a href="?4,35,17">30 (35,17) Green Gem</a><br>
+<a href="?4,17,27">31 (17,27) Some randomly placed items can be here (in one of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?4,28,26">I01 (28,26) "Two coins"</a><br>
+<a href="?4,27,20">I02 (27,20) "Run and jump"</a><br>
+<a href="?4,17,24">I03 (17,24) "Supplies for the quick"</a><br>
+<a href="?4,19,14">I04 (19,14) "Death Row"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?4,28,26">L01 (28,26) Gor Coin (2)</a><br>
+<a href="?4,28,23">L02 (28,23) Torch</a><br>
+<a href="?4,30,20">L03 (30,20) Gor Coin</a><br>
+<a href="?4,33,20">L04 (33,20) Gor Coin</a><br>
+<a href="?4,34,26">L05 (34,26) Gor Coin</a><br>
+<a href="?4,32,26">L06 (32,26) Iron Key</a><br>
+<a href="?4,30,29">L07 (30,29) Iron Key</a><br>
+<a href="?4,21,30">L08 (21,30) Iron Key</a><br>
+<a href="?4,19,27">L09 (19,27) Iron Key</a><br>
+<a href="?4,21,27">L10 (21,27) Iron Key</a><br>
+<a href="?4,18,12">L11 (18,12) Square Key</a><br>
+<a href="?4,27,14">L12 (27,14) Iron Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?4,19,15">A. The only way to get in the Death Row is to open the lock at (02,14,10) with Lock Picks.</a><br>
+<a href="?4,28,11">B. You must have the green gem for the door to open.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?4,30,26">01 (30,26) Worm, Worm Generator (1)</a><br>
+<a href="?4,32,26">02 (32,26) Worm, Worm Generator (1)</a><br>
+<a href="?4,31,21">03 (31,21) Worm [Gor Coin (2), Iron Key]</a><br>
+<a href="?4,17,20">04 (17,20) Flying Eye Generator (1)</a><br>
+<a href="?4,17,29">05 (17,29) Flying Eye Generator (1-4)</a><br>
+<a href="?4,17,08">06 (17,08) Stone Golem [Square Key, Moonstone]</a><br>
+<a href="?4,26,12">07 (26,12) Scorpion</a><br>
+<a href="?4,27,11">08 (27,11) Scorpion</a><br>
+<a href="?4,28,12">09 (28,12) Scorpion</a><br>
+<a href="?4,31,10">10 (31,10) Scorpion Generator (1)</a><br>
+<a href="?4,10,27">11 (10,27) Scorpion Generator (1)</a><br>
+<a href="?4,10,28">12 (10,28) Scorpion [Morningstar]</a>
+</p>
+</div>
+<div id="lv5">
+<p>ITEMS</p>
+<p>
+<a href="?5,15,27">01 (15,27) Iron Key</a><br>
+<a href="?5,17,24">02 (17,24) Iron Key</a><br>
+<a href="?5,20,24">03 (20,24) Chest [Screamer Slice, Cheese, Corn, Bread (2)]</a><br>
+<a href="?5,12,27">04 (12,27) Key Of B</a><br>
+<a href="?5,8,27">05 (08,27) Tourquoise Key, Scroll ("Holy one step forward with purpose and trust that I will guide you through the purgatory that awaits.")</a><br>
+<a href="?5,3,2">06 (03,02) Key Of B</a><br>
+<a href="?5,5,4">07 (05,04) Key Of B</a><br>
+<a href="?5,3,6">08 (03,06) Key Of B, Scroll ("Pray for a miracle")</a><br>
+<a href="?5,8,10">09 (08,10) Scroll ("Map spell Oh Gor Ros")</a><br>
+<a href="?5,15,1">10 (15,01) Scroll ("Map spell Oh Gor Dain")</a><br>
+<a href="?5,15,9">11 (15,09) Vorpal Blade, Onyx Key</a><br>
+<a href="?5,17,11">12 (17,11) Gold Key</a><br>
+<a href="?5,25,11">13 (25,11) Scroll ("Press westward")</a><br>
+<a href="?5,24,14">14 (24,14) Winged Key</a><br>
+<a href="?5,28,23">15 (28,23) Chest [Ful Bomb, Ruby Key, Magical Box (Green), Gor Coin (2), Ven Potion]</a><br>
+<a href="?5,17,10">16 (17,10) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?5,20,27">I01 (20,27) "To the junction of the ways"</a><br>
+<a href="?5,20,15">I02 (20,15) "Wrong Right Left"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?5,19,27">L01 (19,27) Iron Key, Lock Picks</a><br>
+<a href="?5,21,27">L02 (21,27) Iron Key</a><br>
+<a href="?5,15,1">L03 (15,01) Onyx Key</a><br>
+<a href="?5,17,8">L04 (17,08) Onyx Key</a><br>
+<a href="?5,25,7">L05 (25,07) Zokathra spell</a><br>
+<a href="?5,23,20">L06 (23,20) Winged Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?5,18,11">A. An Orange Gem in your inventory will close the pit at (05,19,12) when walking at (05,18,11).</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?5,08,22">01 (08,22) Slime Devil Generator (1)</a><br>
+<a href="?5,0,16">02 (00,16) Slime Devil Generator (1)</a><br>
+<a href="?5,10,16">03 (10,16) Slime Devil</a><br>
+<a href="?5,12,15">04 (12,15) Slime Devil</a><br>
+<a href="?5,12,17">05 (12,17) Slime Devil (2)</a><br>
+<a href="?5,15,4">06 (15,04) Slime Devil Generator (1)</a><br>
+<a href="?5,15,5">07 (15,05) Rive Generator (1)</a><br>
+<a href="?5,27,6">08 (27,06) Couatl</a><br>
+<a href="?5,27,7">09 (27,07) Couatl</a><br>
+<a href="?5,27,8">10 (27,08) Couatl</a><br>
+<a href="?5,24,10">11 (24,10) Couatl</a><br>
+<a href="?5,25,11">12 (25,11) Couatl Generator (1)</a><br>
+<a href="?5,19,13">13 (19,13) Couatl [Orange Gem, Rabbit's Foot #1]</a><br>
+<a href="?5,22,19">14 (22,19) Couatl Generator (1)</a><br>
+<a href="?5,26,22">15 (26,22) Couatl</a><br>
+<a href="?5,27,22">16 (27,22) Couatl [Ra Key]</a><br>
+<a href="?5,28,22">17 (28,22) Couatl</a><br>
+<a href="?5,3,16">18 (03,16) A randomly placed Giggler possessing items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+</div>
+<div id="lv6">
+<p>ITEMS</p>
+<p>
+<a href="?6,11,31">01 (11,31) Pendant Feral</a><br>
+<a href="?6,6,14">02 (06,14) Magical Box (Blue)</a><br>
+<a href="?6,3,9">03 (03,09) Magical Box (Blue)</a><br>
+<a href="?6,8,8">04 (08,08) Magical Box (Blue)</a><br>
+<a href="?6,10,25">05 (10,25) Water, Cheese, Bread, Corn, Apple</a><br>
+<a href="?6,24,23">06 (24,23) Cross Of Neta, Scroll ("Map spell Zo Ir Neta")</a><br>
+<a href="?6,16,27">07 (16,27) Empty Flask, Ful Bomb</a><br>
+<a href="?6,12,9">08 (12,09) Cheese</a><br>
+<a href="?6,12,25">09 (12,25) Orange Gem</a><br>
+<a href="?6,15,26">10 (15,26) Ven Potion</a><br>
+<a href="?6,16,25">11 (16,25) Ven Potion, Illumulet</a><br>
+<a href="?6,18,26">12 (18,26) Ghi, Samurai Sword, Ghi Trousers</a><br>
+<a href="?6,17,26">13 (17,26) Ful Bomb</a><br>
+<a href="?6,18,16">14 (18,16) Torch</a><br>
+<a href="?6,21,13">15 (21,13) Iron Key</a><br>
+<a href="?6,26,13">16 (26,13) Halter, Tattered Pants, Bezerker Helm, Bones</a><br>
+<a href="?6,25,9">17 (25,09) Compass</a><br>
+<a href="?6,22,8">18 (22,08) Apple</a><br>
+<a href="?6,31,16">19 (31,16) Ful Bomb</a><br>
+<a href="?6,16,26">20 (16,26) Some randomly placed items can be here (in one of the four alcoves).</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?6,05,11">I01 (05,11) "Laughing pit"</a><br>
+<a href="?6,29,22">I02 (29,22) "The Cistern"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?6,06,17">L01 (06,17) Gold Key</a><br>
+<a href="?6,19,25">L02 (19,25) Gold Key, Lock Picks</a><br>
+<a href="?6,18,16">L03 (18,16) Torch</a><br>
+<a href="?6,29,17">L04 (29,17) Onyx Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?6,13,26">A. An Orange Gem in your inventory will open the wall at (06,12,26) when walking at (06,12,25).</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?6,10,29">01 (10,29) Water Elemental</a><br>
+<a href="?6,8,29">02 (08,29) Water Elemental</a><br>
+<a href="?6,9,28">03 (09,28) Water Elemental</a><br>
+<a href="?6,6,28">04 (06,28) Water Elemental</a><br>
+<a href="?6,10,27">05 (10,27) Water Elemental</a><br>
+<a href="?6,7,27">06 (07,27) Water Elemental</a><br>
+<a href="?6,8,17">07 (08,17) Rive Generator (1)</a><br>
+<a href="?6,30,30">08 (30,30) Mummy Generator (1)</a><br>
+<a href="?6,10,21">09 (10,21) Ant Man (3)</a><br>
+<a href="?6,12,23">10 (12,23) Ant Man (4) [Gold Key]</a><br>
+<a href="?6,15,21">11 (15,21) Ant Man (4)</a><br>
+<a href="?6,16,21">12 (16,21) Ant Man (4)</a><br>
+<a href="?6,17,21">13 (17,21) Ant Man (4)</a><br>
+<a href="?6,18,21">14 (18,21) Ant Man (4) [Gold Key]</a><br>
+<a href="?6,16,22">15 (16,22) Ant Man (4)</a><br>
+<a href="?6,18,22">16 (18,22) Ant Man (4) [Water]</a><br>
+<a href="?6,17,23">17 (17,23) Ant Man (3)</a><br>
+<a href="?6,18,23">18 (18,23) Ant Man (4)</a><br>
+<a href="?6,17,17">19 (17,17) Mummy (4)</a><br>
+<a href="?6,17,18">20 (17,18) Mummy (4)</a><br>
+<a href="?6,18,18">21 (18,18) Mummy (3)</a><br>
+<a href="?6,25,21">22 (25,21) Water Elemental Generator (1)</a><br>
+<a href="?6,24,20">23 (24,20) Water Elemental Generator (1)</a><br>
+<a href="?6,24,18">24 (24,18) Water Elemental Generator (1)</a><br>
+<a href="?6,23,17">25 (23,17) Water Elemental Generator (1)</a><br>
+<a href="?6,23,16">26 (23,16) Water Elemental Generator (1)</a><br>
+<a href="?6,24,15">27 (24,15) Water Elemental Generator (1)</a><br>
+<a href="?6,22,30">28 (22,30) Giggler</a><br>
+<a href="?6,19,4">29 (19,04) A randomly placed Giggler possessing items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+</div>
+<div id="lv7">
+<p>Note: The small map at the right is for the Atari ST version (as well as Chaos Strikes Back for Windows and Linux). In this version, there is no movable wall at (<a href="?7,33,7">27,07</a>) and an Iron Key will open the Lock at (<a href="?7,36,10">30,10</a>).</p>
+<p>ITEMS</p>
+<p>
+<a href="?7,21,18">01 (21,18) Poison Dart (3)</a><br>
+<a href="?7,26,15">02 (26,15) Rock (3)</a><br>
+<a href="?7,25,16">03 (25,16) Dagger (10)</a><br>
+<a href="?7,28,10">04 (28,10) Cloak Of Night</a><br>
+<a href="?7,29,8">05 (29,08) Crossbow</a><br>
+<a href="?7,28,14">06 (28,14) Iron Key</a><br>
+<a href="?7,15,6">07 (15,06) Magical Box (Green)</a><br>
+<a href="?7,23,20">08 (23,20) Horn Of Fear</a><br>
+<a href="?7,29,20">09 (29,20) Rock</a><br>
+<a href="?7,14,34">10 (14,34) Chest [Dragon Steak, Shank, Bread (2), Cheese (2), Corn, Apple], Boots Of Speed, Compass, Chest [Gem Of Ages, Magical Box (Green) (3), Magical Box (Blue)], Chest [Gor Coin (5)], Helm Of Ra, Dragon Shield, Ee Potion</a><br>
+<a href="?7,21,22">11 (21,22) Biter</a><br>
+<a href="?7,19,20">12 (19,20) Yew Staff</a><br>
+<a href="?7,9,17">13 (09,17) Shank</a><br>
+<a href="?7,13,7">14 (13,07) Gunna, Kirtle</a><br>
+<a href="?7,9,30">15 (09,30) Some randomly placed items can be here. Read the notes below for details. These items are lost.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?7,21,19">I01 (21,19) "Ros"</a><br>
+<a href="?7,22,20">I02 (22,20) "Neta"</a><br>
+<a href="?7,21,21">I03 (21,21) "Ku"</a><br>
+<a href="?7,20,20">I04 (20,20) "Dain"</a><br>
+<a href="?7,25,14">I05 (25,14) "Give up pull the lever"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?7,17,24">L01 (17,24) Skeleton Key</a><br>
+<a href="?7,22,16">L02 (22,16) Skeleton Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?7,7,28">A. Random placement of items</a><br>
+Some items are not always at the same place each time you play Chaos Strikes Back. Although the items are randomly placed, the items themselves are predefined, as well as their possible final locations. There are 22 sets of items (14 are possessed by Gigglers at the beginning) to randomly place at 24 locations. The possible destinations are noted on the maps, here they are:
+</p>
+<p>
+- The eight sets of items carried by the eight Gigglers at (07,05,26) to (07,05,33) can be sent to (00,33,33), (00,38,31), (05,03,16), (09,14,32), (08,20,31), (07,09,07), (07,21,33) and (06,19,04). Note that Gigglers teleported to level 00 will die instantly because they are not allowed on this level.</p>
+<p>
+- The six sets of items carried by the six Gigglers at (07,05,16) to (07,06,19) can be sent to (00,23,17), (04,22,25), (02,31,23), (04,17,27), (01,09,21), (02,31,23), (03,16,30) and (06,16,26). Note that two of these locations will remain empty as there are only six sets of items. Two sets of items may be sent to (02,31,23) as there are two teleporters to that location.</p>
+<p>
+- The eight sets of items stored in the item launcher at (07,14,34) can be sent to (02,12,08), (03,25,19), (05,17,10), (08,30,12), (07,09,30), (00,43,40), (09,09,37) and (02,14,20). Note that there is one of these sets of items that the party will not be able to get.
+</p>
+<p>
+Detailed explanation:<br>
+The random movements of the eight Gigglers at (07,05,26) to (07,05,33) control the random placement of items. The first column of teleporters at (07,09,26) to (07,09,33) is here to accelerate the process. After some time, each of these eight Gigglers will end on one tile at (07,12,26) to (07,12,33). When a Giggler walks on one of these tiles, the following three actions take place (note that each tile can only be triggered once):
+</p>
+<p>
+1. It opens one of the pits at (07,05,16) to (07,06,19). If a Giggler was above the pit, it falls to level 08 where it dies (Although Gigglers are allowed on level 08, they die of their fall because they only have one health point). The items they carried are then teleported to their final destination. Other Gigglers in the area cannot fall in the same pit because Gigglers are not suicidal.</p>
+<p>
+2. It will enable one teleporter at (07,14,27) to (07,14,33) (except when walking on (07,12,26) because the teleporter at (07,14,26) is always enabled). Then the missile launcher at (07,14,34) will fire one set of items that will enter the active teleporter. The teleporter disappears as it is only temporary. Note that one teleporter will send a set of items to the Giggler room at (07,09,30), so these items will be virtually removed from the dungeon as the party cannot go there.</p>
+<p>
+3. It will briefly enable a teleporter on the same tile that will take the Giggler elsewhere. The teleporter disappears so that no other Giggler can enter it. Gigglers sent to level 00 will instantly die and drop their items. Otherwise they will survive (until you meet them of course).
+</p>
+<p>
+Note that the items are not positionned at the very beginning of the game, but only when Gigglers have moved a bit. You may have to check some destinations twice as the items may not have been teleported yet the first time you check them.
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?7,23,13">01 (23,13) Rock Pile (4)</a><br>
+<a href="?7,23,11">02 (23,11) Rock Pile (2)</a><br>
+<a href="?7,23,10">03 (23,10) Rock Pile</a><br>
+<a href="?7,24,9">04 (24,09) Rock Pile (3)</a><br>
+<a href="?7,25,8">05 (25,08) Rock Pile (3)</a><br>
+<a href="?7,26,7">06 (26,07) Rock Pile (2)</a><br>
+<a href="?7,28,7">07 (28,07) Deth Knight (4) [Onyx Key]</a><br>
+<a href="?7,29,7">08 (29,07) Rock Pile (4)</a><br>
+<a href="?7,29,8">09 (29,08) Deth Knight (2) [Gold Key]</a><br>
+<a href="?7,30,18">10 (30,18) Giggler Generator (1)</a><br>
+<a href="?7,25,25">11 (25,25) Oitu Generator (1)</a><br>
+<a href="?7,26,25">12 (26,25) Screamer (2)</a><br>
+<a href="?7,29,26">13 (29,26) Screamer</a><br>
+<a href="?7,26,27">14 (26,27) Screamer (4)</a><br>
+<a href="?7,28,28">15 (28,28) Screamer (3)</a><br>
+<a href="?7,29,29">16 (29,29) Screamer Generator (1-4)</a><br>
+<a href="?7,16,28">17 (16,28) Muncher Generator (1)</a><br>
+<a href="?7,16,33">18 (16,33) Muncher Generator (2)</a><br>
+<a href="?7,17,34">19 (17,34) Muncher Generator (2)</a><br>
+<a href="?7,15,24">20 (15,24) Oitu</a><br>
+<a href="?7,16,24">21 (16,24) Oitu</a><br>
+<a href="?7,17,24">22 (17,24) Oitu</a><br>
+<a href="?7,15,25">23 (15,25) Oitu</a><br>
+<a href="?7,16,25">24 (16,25) Oitu</a><br>
+<a href="?7,17,25">25 (17,25) Oitu</a><br>
+<a href="?7,19,14">26 (19,14) Oitu Generator (1)</a><br>
+<a href="?7,14,19">27 (14,19) Oitu Generator (1)</a><br>
+<a href="?7,9,14">28 (09,14) Oitu Generator (1)</a><br>
+<a href="?7,14,9">29 (14,09) Oitu Generator (1)</a><br>
+<a href="?7,5,16">30 (05,16) Giggler [Diamond Edge, Water, Plate Of Ra]</a><br>
+<a href="?7,6,16">31 (06,16) Giggler [Ku Potion, Dragon Plate, Topaz Key]</a><br>
+<a href="?7,6,17">32 (06,17) Giggler [Side Splitter, Poleyn Of Ra, Greave Of Ra]</a><br>
+<a href="?7,5,18">33 (05,18) Giggler [Dragon Helm, Dragon Poleyn, Dragon Greave]</a><br>
+<a href="?7,5,19">34 (05,19) Giggler [Gold Key, Flamitt, Storm]</a><br>
+<a href="?7,6,19">35 (06,19) Giggler [Wand, Magical Box (Green), Ra Blade]</a><br>
+<a href="?7,5,26">36 (05,26) Giggler [Eye Of Time]</a><br>
+<a href="?7,5,27">37 (05,27) Giggler [Lock Picks]</a><br>
+<a href="?7,5,28">38 (05,28) Giggler [Skeleton Key]</a><br>
+<a href="?7,5,29">39 (05,29) Giggler [Stormring, Onyx Key]</a><br>
+<a href="?7,5,30">40 (05,30) Giggler [Magical Box (Green), Key Of B]</a><br>
+<a href="?7,5,31">41 (05,31) Giggler [Sapphire Key, Rabbit's Foot #2]</a><br>
+<a href="?7,5,32">42 (05,32) Giggler [Gold Key, Ven Potion, Water]</a><br>
+<a href="?7,5,33">43 (05,33) Giggler [Magical Box (Blue), Ful Bomb]</a><br>
+<a href="?7,9,7">44 (09,07) A randomly placed Giggler possessing items can be here. Read the notes above for details.</a><br>
+<a href="?7,21,33">45 (21,33) A randomly placed Giggler possessing items can be here. Read the notes above for details.</a>
+</p>
+</div>
+<div id="lv8">
+<p>ITEMS</p>
+<p>
+<a href="?8,26,21">01 (26,21) Iron Key</a><br>
+<a href="?8,31,20">02 (31,20) Throwing Star</a><br>
+<a href="?8,29,18">03 (29,18) Throwing Star</a><br>
+<a href="?8,31,15">04 (31,15) Arrow (2)</a><br>
+<a href="?8,31,13">05 (31,13) Arrow (3)</a><br>
+<a href="?8,27,12">06 (27,12) Dexhelm</a><br>
+<a href="?8,28,23">07 (28,23) Iron Key</a><br>
+<a href="?8,30,29">08 (30,29) Rock</a><br>
+<a href="?8,28,32">09 (28,32) Elven Doublet, Elven Huke</a><br>
+<a href="?8,27,33">10 (27,33) Dragon Steak</a><br>
+<a href="?8,25,30">11 (25,30) Dragon Steak</a><br>
+<a href="?8,31,37">12 (31,37) Staff</a><br>
+<a href="?8,26,25">13 (26,25) Iron Key</a><br>
+<a href="?8,21,24">14 (21,24) Small Shield</a><br>
+<a href="?8,6,35">15 (06,35) Chest [Magnifier, Scroll ("Map spell Oh Gor Ku"), Gor Coin (3)]</a><br>
+<a href="?8,6,31">16 (06,31) Executioner</a><br>
+<a href="?8,11,26">17 (11,26) Halter, Falchion</a><br>
+<a href="?8,24,23">18 (24,23) Iron Key</a><br>
+<a href="?8,30,12">19 (30,12) Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?8,23,31">I01 (23,31) "No fireballs"</a><br>
+<a href="?8,17,31">I02 (17,31) "No fireballs"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?8,30,18">L01 (30,18) Onyx Key, Iron Key</a><br>
+<a href="?8,30,16">L02 (30,16) Iron Key, Lock Picks</a><br>
+<a href="?8,30,15">L03 (30,15) Onyx Key, Lock Picks</a><br>
+<a href="?8,15,13">L04 (15,13) Square Key</a><br>
+<a href="?8,7,36">L05 (07,36) Iron Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?8,15,14">A. "Vexing Vexirk" puzzle:</a><br>
+When you walk at (15,13), a Vexirk (Creatures #06) is teleported to (15,13). You can kill it to take its Iron Key and escape from that area. But you should try to scare and corner it at (24,23) by using War Cry or the Horn of Fear. There he will teleport to (09,30,37) where he will die. He will drop its Cape that will trigger the teleporter there, which will teleport the Vexirk's items as well as the items that were at (09,30,37) in front of you at (24,23). The teleported Mirror Of Dawn will activate the teleporter at (25,13) which will teleport a second Vexirk (Creature #05) to (18,14). You will not be able to corner it at the same place, but you can do it at (09,11). He will teleport to (09,28,37) where he will die. He will drop its Cheese that will trigger the teleporter there, which will teleport the Vexirk's items as well as the items that were at (09,28,37) in front of you at (09,11). A third Vexirk (Creature #36) will also be teleported to (18,14). You can kill this one normally.
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?8,30,13">01 (30,13) Mummy</a><br>
+<a href="?8,30,12">02 (30,12) Mummy (2)</a><br>
+<a href="?8,31,12">03 (31,12) Mummy</a><br>
+<a href="?8,30,11">04 (30,11) Mummy (3) [Gor Coin]</a><br>
+<a href="?8,25,13">05 (25,13) Vexirk [Apple, Corn, Bread, Cheese]</a><br>
+<a href="?8,25,11">06 (25,11) Vexirk [Cape, Water, Square Key]</a><br>
+<a href="?8,25,29">07 (25,29) Muncher (4)</a><br>
+<a href="?8,26,29">08 (26,29) Muncher (4)</a><br>
+<a href="?8,25,30">09 (25,30) Muncher (4)</a><br>
+<a href="?8,26,30">10 (26,30) Muncher (4)</a><br>
+<a href="?8,27,31">11 (27,31) Muncher (4)</a><br>
+<a href="?8,28,31">12 (28,31) Muncher (4)</a><br>
+<a href="?8,29,31">13 (29,31) Muncher (4)</a><br>
+<a href="?8,27,32">14 (27,32) Muncher (4)</a><br>
+<a href="?8,28,32">15 (28,32) Muncher (4)</a><br>
+<a href="?8,29,32">16 (29,32) Muncher (4)</a><br>
+<a href="?8,27,33">17 (27,33) Muncher (4)</a><br>
+<a href="?8,28,33">18 (28,33) Muncher (4)</a><br>
+<a href="?8,17,31">19 (17,31) Muncher Generator (2)</a><br>
+<a href="?8,18,35">20 (18,35) Vexirk [Magical Box (Green)]</a><br>
+<a href="?8,22,35">21 (22,35) Vexirk</a><br>
+<a href="?8,23,38">22 (23,38) Deth Knight (2)</a><br>
+<a href="?8,16,38">23 (16,38) Deth Knight</a><br>
+<a href="?8,14,36">24 (14,36) Vexirk (3) [Bread, Onyx Key, Choker]</a><br>
+<a href="?8,13,37">25 (13,37) Vexirk (3) [Gor Coin]</a><br>
+<a href="?8,12,38">26 (12,38) Vexirk (4) [Cheese, Apple]</a><br>
+<a href="?8,11,37">27 (11,37) Vexirk [Iron Key]</a><br>
+<a href="?8,9,36">28 (09,36) Vexirk (2) [Ful Bomb, Ven Potion]</a><br>
+<a href="?8,9,38">29 (09,38) Vexirk (2) [Gold Key, Magical Box (Blue)]</a><br>
+<a href="?8,8,37">30 (08,37) Vexirk [Rabbit's Foot #3, Jewel Symal]</a><br>
+<a href="?8,7,34">31 (07,34) Deth Knight</a><br>
+<a href="?8,9,34">32 (09,34) Deth Knight</a><br>
+<a href="?8,7,28">33 (07,28) Deth Knight</a><br>
+<a href="?8,9,28">34 (09,28) Deth Knight</a><br>
+<a href="?8,17,25">35 (17,25) Mummy Generator (1-4)</a><br>
+<a href="?8,5,11">36 (05,11) Vexirk</a><br>
+<a href="?8,20,31">37 (20,31) A randomly placed Giggler possessing items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+</div>
+<div id="lv9">
+<p>ITEMS</p>
+<p>
+<a href="?9,12,13">01 (12,13) Leather Pants</a><br>
+<a href="?9,19,11">02 (19,11) Iron Key</a><br>
+<a href="?9,24,13">03 (24,13) Rock</a><br>
+<a href="?9,27,12">04 (27,12) Claw Bow</a><br>
+<a href="?9,27,15">05 (27,15) Rock</a><br>
+<a href="?9,28,15">06 (28,15) Leather Jerkin</a><br>
+<a href="?9,31,15">07 (31,15) Boulder</a><br>
+<a href="?9,29,22">08 (29,22) Sling</a><br>
+<a href="?9,27,30">09 (27,30) Iron Key, Gor Coin, Chest [Vi Potion, Calista, Shank, Moonstone]</a><br>
+<a href="?9,11,26">10 (11,26) Rock</a><br>
+<a href="?9,14,24">11 (14,24) Rock</a><br>
+<a href="?9,18,25">12 (18,25) Bones</a><br>
+<a href="?9,6,28">13 (06,28) Rock</a><br>
+<a href="?9,6,33">14 (06,33) Iron Key</a><br>
+<a href="?9,9,31">15 (09,31) Rapier</a><br>
+<a href="?9,10,31">16 (10,31) Boulder</a><br>
+<a href="?9,14,30">17 (14,30) Boulder</a><br>
+<a href="?9,16,34">18 (16,34) Bones</a><br>
+<a href="?9,9,37">19 (09,37) Ful Bomb (4), Ven Potion (4), Magical Box (Blue), Magical Box (Green), Slayer (2), Some randomly placed items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a><br>
+<a href="?9,21,30">20 (21,30) Onyx Key (Amiga), Iron Key (Atari ST)</a><br>
+<a href="?9,28,37">21 (28,37) Chest [Master Key, Rabbit's Foot #4, Ee Potion, Gor Coin], Ekkhard Cross</a><br>
+<a href="?9,30,37">22 (30,37) Magical Box (Green), Mirror Of Dawn</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?9,21,28">I01 (21,28) "Surrender your possesions"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?9,7,36">L01 (07,36) Onyx Key, Lock Picks</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?9,21,28">A. You only have to surrender Leather Boots and turn around for the wall to open. The items you surrender will be teleported to the alcoves at (04,17,27).</a> [Discovered by Beowuuf (beowuuf@yahoo.com)]<br>
+<a href="?9,29,37">B. See note about the "Vexing Vexirk"</a> on <a href="?8,15,14">Chaos Strikes Back Level 08</a>.
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?9,28,18">01 (28,18) Worm Generator (2)</a><br>
+<a href="?9,27,25">02 (27,25) Worm Generator (2)</a><br>
+<a href="?9,13,28">03 (13,28) Worm Generator (2)</a><br>
+<a href="?9,13,31">04 (13,31) Dragon [Solid Key, Hosen, Mithral Mail, Mithral Aketon, Basinet, Axe]</a><br>
+<a href="?9,14,32">05 (14,32) A randomly placed Giggler possessing items can be here.</a> <a href="?7,7,28">Read the notes of Chaos Strikes Back Level 07 for details.</a>
+</p>
+</div>
+<div id="lv10">
+<p>CHAMPIONS</p>
+<p>
+<a href="?10,4,3">C01 (04,03) Talon</a><br>
+<a href="?10,3,2">C02 (03,02) Airwing</a><br>
+<a href="?10,2,3">C03 (02,03) Aroc</a><br>
+<a href="?10,3,4">C04 (03,04) Leta</a><br>
+<a href="?10,2,7">C05 (02,07) Plague</a><br>
+<a href="?10,1,8">C06 (01,08) Necro</a><br>
+<a href="?10,2,9">C07 (02,09) Deth</a><br>
+<a href="?10,3,8">C08 (03,08) Skelar The Slayer</a><br>
+<a href="?10,4,11">C09 (04,11) Tunda The Surefooted</a><br>
+<a href="?10,5,12">C10 (05,12) Lana</a><br>
+<a href="?10,12,14">C11 (12,14) Itza Warlord Of Uxmal</a><br>
+<a href="?10,15,12">C12 (15,12) Tula Princess Of Uxmal</a><br>
+<a href="?10,16,8">C13 (16,08) Petal</a><br>
+<a href="?10,16,9">C14 (16,09) Buzzzzz</a><br>
+<a href="?10,15,3">C15 (15,03) Sting</a><br>
+<a href="?10,16,2">C16 (16,02) Slogar Webber Of Arachnia</a><br>
+<a href="?10,15,1">C17 (15,01) Gnatu Spearing Of Leef</a><br>
+<a href="?10,14,2">C18 (14,02) Mantia Spellweaver Of Kelt</a><br>
+<a href="?10,9,9">C19 (09,09) Toadrot Prince Of Skulash</a><br>
+<a href="?10,10,10">C20 (10,10) Ven High Priest Of Ssha</a><br>
+<a href="?10,11,9">C21 (11,09) Algor Marsh Hunter</a><br>
+<a href="?10,10,8">C22 (10,08) Dema Champion Of Iissh</a><br>
+<a href="?10,1,13">C23 (01,13) Lor Champion Of Good</a><br>
+<a href="?10,19,1">C24 (19,01) Kazai Shadow Warrior</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?10,9,1">A. (09,01)</a> Choose four <a href='http://dmweb.free.fr/?q=node/191'>Chaos Strikes Back Champions</a>.<br>
+<a href="?10,17,6">B. (08,15) &amp; (17,06) You must have at least one champion in your team before being able to open the door.</a><br>
+<a href="?10,19,1">C. (19,01) Resurrecting or reincarnating Plague (C05), Necro (C06), Deth (C07), Skelar The Slayer (C08) or Kazai Shadow Warrior (C24) will close the door to Lor Champion Of Good at (01,14).</a><br>
+<a href="?10,1,13">D. (01,13) Resurrecting or reincarnating Lor Champion Of Good (C23) will close the door to Kazai Shadow Warrior (C24) at (19,02).</a>
+</p>
+</div>
+<div id="lv11">
+<p>CREATURES</p>
+<p>
+<a href="?11,2,13">01 (02,13) Mummy (3)</a><br>
+<a href="?11,2,14">02 (02,14) Mummy (2)</a><br>
+<a href="?11,2,17">03 (02,17) Mummy (4)</a><br>
+<a href="?11,4,15">04 (04,15) Mummy (4)</a><br>
+<a href="?11,4,16">05 (04,16) Mummy (4)</a><br>
+<a href="?11,5,14">06 (05,14) Mummy (4)</a><br>
+<a href="?11,5,16">07 (05,16) Mummy (2)</a><br>
+<a href="?11,16,8">08 (16,08) Rock Pile (2)</a><br>
+<a href="?11,17,10">09 (17,10) Rock Pile</a><br>
+<a href="?11,18,9">10 (18,09) Rock Pile</a><br>
+<a href="?11,19,8">11 (19,08) Rock Pile (4)</a><br>
+<a href="?11,20,9">12 (20,09) Rock Pile</a>
+</p>
+</div>
+<p><a href="http://dmweb.free.fr/">text and maps: dmweb.free.fr</a>, <a href="?12,0,0">javascript: 3dh</a> (gmail: 3dh.net)</p>
+</div>
+<script>
+var lv=Number(getUrlVars()[0]);
+document.getElementById('mapa').style.backgroundPosition='-'+(lv*477)+'px 0px';
+if(lv==0){var lvw=49;var lvh=46;var lvx=16;var lvy=13;}
+if(lv==1){var lvw=39;var lvh=39;var lvx=6;var lvy=6;}
+if(lv==2){var lvw=38;var lvh=35;var lvx=6;var lvy=4;}
+if(lv==3){var lvw=37;var lvh=34;var lvx=4;var lvy=5;}
+if(lv==4){var lvw=38;var lvh=31;var lvx=8;var lvy=7;}
+if(lv==5){var lvw=31;var lvh=30;var lvx=-1;var lvy=-1;}
+if(lv==6){var lvw=32;var lvh=32;var lvx=2;var lvy=3;}
+if(lv==7){var lvw=31;var lvh=35;var lvx=4;var lvy=4;}
+if(lv==8){var lvw=32;var lvh=39;var lvx=4;var lvy=10;}
+if(lv==9){var lvw=32;var lvh=38;var lvx=5;var lvy=10;}
+if(lv==10){var lvw=20;var lvh=16;var lvx=-1;var lvy=-1;}
+if(lv==11){var lvw=22;var lvh=19;var lvx=0;var lvy=2;}
+if(lv>=12){var lvw=0;var lvh=0;var lvx=1;var lvy=1;}
+
+if(lv==4){document.getElementById('txt').style.top=((lvh-lvy+8)*14)+5+'px';}
+else{document.getElementById('txt').style.top=((lvh-lvy+1)*14)+5+'px';}
+
+for (var i=0; i<=11; ++i){
+if(lv>=0&&lv<=9){document.title='CSB Level '+lv;document.getElementById('lv'+lv).style.display='block';}
+else if(lv==11 || lv==10){document.title='CSB Level '+(lv-10)+' Prison';document.getElementById('lv'+lv).style.display='block';}
+else{document.title='Chaos Strikes Back Compendium';document.getElementById('lv'+i).style.display='block';}
+}
+
+LoadCoordinates(lv,Number(getUrlVars()[1]),Number(getUrlVars()[2]));
+</script>
+</body>
+</html>
