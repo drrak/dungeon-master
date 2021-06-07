@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>DM Level _</title>
+<meta name="description" content="Dungeon Master - interactive maps by 3dh">
+<meta name="keywords" content="dungeon master, dm, interactive, maps, 3dh">
+<link rel="icon" href="../file/ico.ico">
+<script src="dm-js.js"></script>
+<style>
+html,body{font:12px "Courier New",serif;color:#b6b6b6;position:absolute;margin:0 auto;padding:0;background-color:#484848;}
+/*image-rendering:-o-crisp-edges;image-rendering:-moz-crisp-edges;image-rendering:-webkit-optimize-contrast;-ms-interpolation-mode:nearest-neighbor;*/
+img{border:none;}
+#lv0,#lv1,#lv2,#lv3,#lv4,#lv5,#lv6,#lv7,#lv8,#lv9,#lv10,#lv11,#lv12,#lv13{display:none;border-bottom-style:dashed;border-width:1px;}
+#inf{border-bottom-style:dashed;border-top-style:dashed;border-width:1px;}
+a:link{color:#b6b6b6;text-decoration:none;}
+a:visited{color:#a0a0a0;text-decoration:none;}
+a:hover, a:active{color:#b6b6b6;text-decoration:underline;}
+#mapa{
+position:fixed;
+left:0px;
+top:0px;
+background:url(../file/dmmap.png) no-repeat;
+width:477px;
+height:477px;
+}
+#cel{position:absolute;left:-22px;top:-22px;}
+#txt{position:relative;background-color:#484848;width:555px;top:294px;padding:4px 10px;}
+#champ{
+border-bottom:5px solid #484848;
+display:inline-block;
+background:url(../file/dm-champions.png) no-repeat;
+width:64px;
+height:58px;
+}
+</style>
+</head>
+<body>
+<div onmouseup="GetCoordinates(lv,event.clientX,event.clientY)" id="mapa">
+<img id="cel" src="../file/p.png" width="15" height="15" alt="c" />
+</div>
+<div id="txt">
+<div id="inf">
+<p id="map"><a href="?0,9,4">Dungeon Master Compendium</a></p>
+</div>
+<div id="lv0">
+<p>ITEMS</p>
+<p>
+<a href="?0,4,9">01 (04,09) Apple</a><br>
+<a href="?0,5,11">02 (05,11) Bread</a><br>
+<a href="?0,4,14">03 (04,14) Torch</a><br>
+<a href="?0,4,15">04 (04,15) Water, Scroll ("Invoke Ful for a magic torch")</a><br>
+<a href="?0,4,17">05 (04,17) Scroll ("New lives for old bones")</a><br>
+<a href="?0,0,16">06 (00,16) Corn</a><br>
+<a href="?0,2,13">07 (02,13) Bread</a><br>
+<a href="?0,2,12">08 (02,12) Cheese</a><br>
+<a href="?0,2,11">09 (02,11) Apple</a>
+</p>
+<p>CHAMPIONS</p>
+<p>
+<a href="?0,10,4">C01 (10,04) Iaido Ruyito Chiburi</a><br>
+<a href="?0,10,5">C02 (10,05) Zed Duke Of Banville</a><br>
+<a href="?0,14,3">C03 (14,03) Chani Sayyadina Sihaya</a><br>
+<a href="?0,15,4">C04 (15,04) Hawk The Fearless</a><br>
+<a href="?0,14,6">C05 (14,06) Boris Wizard Of Baldor</a><br>
+<a href="?0,16,8">C06 (16,08) Alex Ander</a><br>
+<a href="?0,17,9">C07 (17,09) Nabi The Prophet</a><br>
+<a href="?0,16,14">C08 (16,14) Hissssa Lizar Of Makan</a><br>
+<a href="?0,16,17">C09 (16,17) Gothmog</a><br>
+<a href="?0,14,12">C10 (14,12) Sonja She Devil</a><br>
+<a href="?0,13,12">C11 (13,12) Leyla Shadowseek</a><br>
+<a href="?0,13,14">C12 (13,14) Mophus The Healer</a><br>
+<a href="?0,12,13">C13 (12,13) Wuuf The Bika</a><br>
+<a href="?0,11,15">C14 (11,15) Stamm BladeCaster</a><br>
+<a href="?0,7,16">C15 (07,16) Azizi Johari</a><br>
+<a href="?0,8,15">C16 (08,15) Leif The Valiant</a><br>
+<a href="?0,9,13">C17 (09,13) Tiggy Tamal</a><br>
+<a href="?0,7,13">C18 (07,13) Wu Tse Son Of Heaven</a><br>
+<a href="?0,6,13">C19 (06,13) Daroou</a><br>
+<a href="?0,7,9">C20 (07,09) Halk The Barbarian</a><br>
+<a href="?0,9,9">C21 (09,09) Syra Child Of Nature</a><br>
+<a href="?0,11,10">C22 (11,10) Gando Thurfoot</a><br>
+<a href="?0,12,9">C23 (12,09) Linflas</a><br>
+<a href="?0,9,7">C24 (09,07) Elija Lion Of Yaitopya</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?0,1,4">A. (01,04) You can use the spell "See Through Walls" in front of the door to see Lord Order. If you come back here with the Firestaff (not completed with the power gem), the door opens, then you are teleported in front of Lord Order where you can see an alternate game end.</a><br>
+<a href="?0,9,4">B. (09,04)</a> Choose four <a href="http://dmweb.free.fr/?q=node/199">Dungeon Master Champions</a>.
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?0,8,4">I01 (08,04) "Hall Of Champions"</a><br>
+<a href="?0,4,17">I02 (04,17) "Vi Altar Of Rebirth"</a>
+</p>
+</div>
+<div id="lv1">
+<p>ITEMS</p>
+<p>
+<a href="?1,6,14">01 (06,14) Club</a><br>
+<a href="?1,6,17">02 (06,17) Corn, Apple, Dagger, Falchion, Scroll ("Small details can hide great rewards")</a><br>
+<a href="?1,0,16">03 (00,16) Gold Key</a><br>
+<a href="?1,1,23">04 (01,23) Topaz Key</a><br>
+<a href="?1,7,23">05 (07,23) Leather Boots, Gold Key</a><br>
+<a href="?1,8,19">06 (08,19) Elven Doublet, Dagger, Arrow, Torch, Emerald Key</a><br>
+<a href="?1,4,30">07 (04,30) Rock</a><br>
+<a href="?1,15,24">08 (15,24) Iron Key, Ghi Trousers</a><br>
+<a href="?1,14,21">09 (14,21) Solid Key</a><br>
+<a href="?1,13,22">10 (13,22) Falchion</a><br>
+<a href="?1,14,22">11 (14,22) Torch, Leather Boots</a><br>
+<a href="?1,8,17">12 (08,17) Gold Key</a><br>
+<a href="?1,13,19">13 (13,19) Gold Key</a><br>
+<a href="?1,25,14">14 (25,14) Boulder</a><br>
+<a href="?1,30,15">15 (30,15) Gold Key, Apple</a><br>
+<a href="?1,17,25">16 (17,25) Apple</a><br>
+<a href="?1,29,25">17 (29,25) Rock</a><br>
+<a href="?1,31,20">18 (31,20) Iron Key</a><br>
+<a href="?1,31,24">19 (31,24) Key of B</a><br>
+<a href="?1,19,25">20 (19,25) Drumstick, Empty flask (3), Leather pants, Scroll ("Casting Vi Bro into a flask creates a serum for curing poison"), Scroll ("Casting Vi into a flask creates a serum that heals wounds")</a><br>
+<a href="?1,16,27">21 (16,27) Apple, Cheese (2), Torch</a><br>
+<a href="?1,13,28">22 (13,28) Gold Key, Throwing Star</a><br>
+<a href="?1,30,33">23 (30,33) Copper Coin</a><br>
+<a href="?1,30,39">24 (30,39) Torch</a><br>
+<a href="?1,27,43">25 (27,43) Chest [Ya potion (2), Scroll ("Drink these to gain magical defense")]</a><br>
+<a href="?1,12,44">26 (12,44) Throwing Star</a><br>
+<a href="?1,13,43">27 (13,43) Water</a><br>
+<a href="?1,14,42">28 (14,42) Apple</a><br>
+<a href="?1,16,42">29 (16,42) Falchion</a><br>
+<a href="?1,15,45">30 (15,45) Magical Box (Blue)</a><br>
+<a href="?1,5,32">31 (05,32) Buckler</a><br>
+<a href="?1,2,45">32 (02,45) Chest [Drumstick, Empty Flask, Corn, Cheese, Bread (2), Magical Box (Blue), Scroll ("Des Ven will conjure a poison spell")]</a><br>
+<a href="?1,6,43">33 (06,43) Torch</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?1,29,16">I01 (29,16) "Step inside take a ride"</a><br>
+<a href="?1,22,22">I02 (22,22) "This wall says nothing"</a><br>
+<a href="?1,13,30">I03 (13,30) "To close pit leave a valuable on floor"</a><br>
+<a href="?1,28,41">I04 (28,41) "None shall pass"</a><br>
+<a href="?1,18,40">I05 (18,40) "This fountain accepts one wish."</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?1,0,16">L01 (00,16) Gold Key</a><br>
+<a href="?1,3,19">L02 (03,19) Topaz Key</a><br>
+<a href="?1,5,19">L03 (05,19) Gold Key</a><br>
+<a href="?1,11,27">L04 (11,27) Emerald Key</a><br>
+<a href="?1,2,27">L05 (02,27) Iron Key</a><br>
+<a href="?1,5,27">L06 (05,27) Solid Key</a><br>
+<a href="?1,10,14">L07 (10,14) Gold Key</a><br>
+<a href="?1,22,19">L08 (22,19) Gold Key</a><br>
+<a href="?1,28,18">L09 (28,18) Gold Key</a><br>
+<a href="?1,30,21">L10 (30,21) Iron Key</a><br>
+<a href="?1,24,24">L11 (24,24) Key of B</a><br>
+<a href="?1,21,35">L12 (21,35) Gold Key</a><br>
+<a href="?1,18,40">L13 (18,40) Copper Coin</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?1,6,16">01 (06,16) Mummy</a><br>
+<a href="?1,4,27">02 (04,27) Screamer</a><br>
+<a href="?1,11,19">03 (11,19) Screamer</a><br>
+<a href="?1,13,18">04 (13,18) Screamer (4)</a><br>
+<a href="?1,22,19">05 (22,19) Screamer (2)</a><br>
+<a href="?1,27,16">06 (27,16) Mummy</a><br>
+<a href="?1,31,23">07 (31,23) Screamer</a><br>
+<a href="?1,24,27">08 (24,27) Mummy</a><br>
+<a href="?1,16,30">09 (16,30) Screamer (2)</a><br>
+<a href="?1,27,34">10 (27,34) Mummy (3)</a><br>
+<a href="?1,20,43">11 (20,43) Screamer (4)</a><br>
+<a href="?1,8,38">12 (08,38) Screamer (4) [Torch, Empty Flask]</a><br>
+<a href="?1,5,38">13 (05,38) Screamer [Throwing Star]</a><br>
+<a href="?1,3,32">14 (03,32) Mummy (4)</a><br>
+<a href="?1,1,33">15 (01,33) Mummy (2)</a>
+</p>
+</div>
+<div id="lv2">
+<p>ITEMS</p>
+<p>
+<a href="?2,14,38">01 (14,38) Bezerker Helm, Suede Boots, Leather Pants, Leather Jerkin</a><br>
+<a href="?2,13,38">02 (13,38) Arrow, Waterskin, Cheese</a><br>
+<a href="?2,08,38">03 (08,38) Compass</a><br>
+<a href="?2,21,23">04 (21,23) Chest [Apple, Cheese, Gold Coin (2), Scroll ("Ya will create a stamina potion"), Scroll ("Some doors can be opened with a Zo spell")]</a><br>
+<a href="?2,17,29">05 (17,29) Drumstick</a><br>
+<a href="?2,5,34">06 (05,34) Chest [Mirror Of Dawn]</a><br>
+<a href="?2,12,32">07 (12,32) Drumstick, Gold Key, Apple, Leather Jerkin</a><br>
+<a href="?2,9,27">08 (09,27) Silver Coin</a><br>
+<a href="?2,9,28">09 (09,28) Bread</a><br>
+<a href="?2,6,31">10 (06,31) Arrow</a><br>
+<a href="?2,5,27">11 (05,27) Wand</a><br>
+<a href="?2,5,23">12 (05,23) Chest [Silver Coin, Copper Coin (3), Magical Box (Blue)]</a><br>
+<a href="?2,8,25">13 (08,25) Gold Key</a><br>
+<a href="?2,8,23">14 (08,23) Corn, Apple, Cheese (2)</a><br>
+<a href="?2,9,24">15 (09,24) Leather Pants</a><br>
+<a href="?2,14,20">16 (14,20) Bread</a><br>
+<a href="?2,6,12">17 (06,12) Cheese</a><br>
+<a href="?2,12,16">18 (12,16) Arrow</a><br>
+<a href="?2,12,20">19 (12,20) Cheese, Wooden Shield</a><br>
+<a href="?2,5,20">20 (05,20) Gold Key, Sabre, Fine Robe (Body), Fine Robe (Legs)</a><br>
+<a href="?2,18,11">21 (18,11) Arrow</a><br>
+<a href="?2,27,15">22 (27,15) Gold Key</a><br>
+<a href="?2,24,15">23 (24,15) Helmet</a><br>
+<a href="?2,24,14">24 (24,14) Elven Huke</a><br>
+<a href="?2,28,22">25 (28,22) Apple</a><br>
+<a href="?2,34,22">26 (34,22) Sling</a><br>
+<a href="?2,32,21">27 (32,21) Cheese</a><br>
+<a href="?2,32,19">28 (32,19) Apple</a><br>
+<a href="?2,29,14">29 (29,14) Rabbit's Foot #2</a><br>
+<a href="?2,31,11">30 (31,11) Blue Gem, Drumstick</a><br>
+<a href="?2,32,29">31 (32,29) Cheese</a><br>
+<a href="?2,30,27">32 (30,27) Gold Key</a><br>
+<a href="?2,31,27">33 (31,27) Bezerker Helm</a><br>
+<a href="?2,32,27">34 (32,27) Bread</a><br>
+<a href="?2,28,33">35 (28,33) Arrow</a><br>
+<a href="?2,22,38">36 (22,38) Gold Key</a><br>
+<a href="?2,32,40">37 (32,40) Ra Key</a><br>
+<a href="?2,32,38">38 (32,38) Empty Flask, Scroll ("The spell Des Ew weakens nonmaterial beings")</a><br>
+<a href="?2,34,39">39 (34,39) Torch</a><br>
+<a href="?2,35,39">40 (35,39) Torch</a><br>
+<a href="?2,35,40">41 (35,40) Cheese, Bread, Drumstick, Apple</a><br>
+<a href="?2,32,36">42 (32,36) Empty Flask, Mail Aketon</a><br>
+<a href="?2,34,36">43 (34,36) Drumstick (2), Sword</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?2,19,28">I01 (19,28) "Choose your door choose your fate"</a><br>
+<a href="?2,16,26">I02 (16,26) "Chambers of the guardian"</a><br>
+<a href="?2,16,24">I03 (16,24) "The vault"</a><br>
+<a href="?2,14,24">I04 (14,24) "You must pay for your entrance."</a><br>
+<a href="?2,12,26">I05 (12,26) "Cast your influence, cast your might"</a><br>
+<a href="?2,18,22">I06 (18,22) "The Matrix"</a><br>
+<a href="?2,20,22">I07 (20,22) "Time is of the essence"</a><br>
+<a href="?2,20,18">I08 (20,18) "Hit and run"</a><br>
+<a href="?2,22,24">I09 (22,24) "Room of the gem"</a><br>
+<a href="?2,25,24">I10 (25,24) "Step right up going down..."</a><br>
+<a href="?2,22,26">I11 (22,26) "Creature cavern"</a><br>
+<a href="?2,32,39">I12 (32,39) "Vi altar of rebirth"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?2,11,34">L01 (11,34) Mirror Of Dawn</a><br>
+<a href="?2,14,24">L02 (14,24) Gold Coin (2)</a><br>
+<a href="?2,11,29">L03 (11,29) Silver Coin</a><br>
+<a href="?2,5,23">L04 (05,23) Copper Coin</a><br>
+<a href="?2,26,24">L05 (26,24) Blue Gem</a><br>
+<a href="?2,26,40">L06 (26,40) Gold Key</a><br>
+<a href="?2,28,40">L07 (28,40) Gold Key</a><br>
+<a href="?2,30,40">L08 (30,40) Gold Key</a><br>
+<a href="?2,36,36">L09 (36,36) Gold Key</a><br>
+<a href="?2,33,34">L10 (33,34) Gold Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?2,12,26">A. (12,26) Cast a Zo spell to open the door, then throw an item to close the pit.</a><br>
+<a href="?2,21,16">B. (21,16) Press the button and throw an item in the teleporter.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?2,15,30">01 (15,30) Trolin (3)</a><br>
+<a href="?2,13,34">02 (13,34) Rockpile</a><br>
+<a href="?2,12,32">03 (12,32) Mummy (2)</a><br>
+<a href="?2,11,22">04 (11,22) Trolin (2)</a><br>
+<a href="?2,11,23">05 (11,23) Mummy (4)</a><br>
+<a href="?2,6,29">06 (06,29) Rockpile (2)</a><br>
+<a href="?2,6,26">07 (06,26) Trolin (1)</a><br>
+<a href="?2,5,25">08 (05,25) Trolin (4) [Cheese]</a><br>
+<a href="?2,23,12">09 (23,12) Trolin (2)</a><br>
+<a href="?2,26,19">10 (26,19) Rockpile (2)</a><br>
+<a href="?2,35,29">11 (35,29) Trolin (2)</a><br>
+<a href="?2,32,21">12 (32,21) Mummy (4)</a><br>
+<a href="?2,32,17">13 (32,17) Rockpile (2)</a><br>
+<a href="?2,24,30">14 (24,30) Trolin (2)</a><br>
+<a href="?2,22,31">15 (22,31) Mummy (3)</a><br>
+<a href="?2,28,37">16 (28,37) Trolin (3)</a><br>
+<a href="?2,29,38">17 (29,38) Trolin Generator (1-4)</a><br>
+<a href="?2,25,37">18 (25,37) Trolin (4) [Screamer Slice, Cheese]</a><br>
+<a href="?2,32,36">19 (32,36) Rockpile (2)</a><br>
+<a href="?2,34,36">20 (34,36) Trolin (2)</a>
+</p>
+</div>
+<div id="lv3">
+<p>ITEMS</p>
+<p>
+<a href="?3,25,23">01 (25,23) Drumstick</a><br>
+<a href="?3,23,31">02 (23,31) Cheese, Water, Axe</a><br>
+<a href="?3,10,29">03 (10,29) Gold Key</a><br>
+<a href="?3,12,21">04 (12,21) Magical Box (Blue), Drumstick</a><br>
+<a href="?3,26,20">05 (26,20) Scroll ("Ya Bro creates a magical shield potion"), Scroll ("The spell Oh Ven cast a cloud of poison.")</a><br>
+<a href="?3,20,17">06 (20,17) Teowand</a><br>
+<a href="?3,23,11">07 (23,11) Small Shield</a><br>
+<a href="?3,18,02">08 (18,02) Basinet</a><br>
+<a href="?3,16,00">09 (16,00) Leather Jerkin, Leather Pants</a><br>
+<a href="?3,14,06">10 (14,06) Empty Flask</a><br>
+<a href="?3,10,12">11 (10,12) Rapier</a><br>
+<a href="?3,6,18">12 (06,18) Neta Potion, Drumstick</a><br>
+<a href="?3,2,23">13 (02,23) Leg Mail</a><br>
+<a href="?3,1,22">14 (01,22) Elven Boots</a><br>
+<a href="?3,03,18">15 (03,18) Empty Flask</a><br>
+<a href="?3,0,08">16 (00,08) Drumstick, Torch, Hosen</a><br>
+<a href="?3,10,09">17 (10,09) Bow</a><br>
+<a href="?3,10,08">18 (10,08) Gold Coin</a><br>
+<a href="?3,06,06">19 (06,06) Horn Of Fear, Empty Flask</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?3,30,30">I01 (30,30) "Prepare to meet your doom"</a><br>
+<a href="?3,23,31">I02 (23,31) "Don't let a closed door stop you"</a><br>
+<a href="?3,29,7">I03 (29,07) "Shortcut"</a><br>
+<a href="?3,14,17">I04 (14,17) "Shortcut back"</a><br>
+<a href="?3,8,3">I05 (08,03) "This is my prisoner. Let him suffer."</a><br>
+<a href="?3,6,3">I06 (06,03) "You will regret that."</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?3,25,13">L01 (25,13) Gold Coin</a><br>
+<a href="?3,28,7">L02 (28,07) Gold Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?3,19,30">A. (19,30) A teleporter appears when the button is pressed, and teleports you in front of the door. Run through it before it closes.</a><br>
+<a href="?3,23,16">B. (23,16) Creatures cannot pass through this teleporter.</a><br>
+<a href="?3,1,14">C. (01,14) This room is a good place to train because it contains a Screamer Generator, and Screamers are easy to kill. It is also a unlimited source of food (Screamer Slices), and you have a fountain downstairs.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?3,26,28">01 (26,28) Rockpile</a><br>
+<a href="?3,21,28">02 (21,28) Screamer (4) [Gold Coin]</a><br>
+<a href="?3,21,24">03 (21,24) Rockpile (3) [Gold Coin]</a><br>
+<a href="?3,11,29">04 (11,29) Giant Wasp</a><br>
+<a href="?3,14,26">05 (14,26) Magenta Worm (2) [Gold Coin]</a><br>
+<a href="?3,16,21">06 (16,21) Magenta Worm (2) [Gold Coin]</a><br>
+<a href="?3,27,17">07 (27,17) Ghost</a><br>
+<a href="?3,24,5">08 (24,05) Magenta Worm Generator (2)</a><br>
+<a href="?3,15,6">09 (15,06) Magenta Worm Generator (2)</a><br>
+<a href="?3,10,17">10 (10,17) Magenta Worm Generator (2)</a><br>
+<a href="?3,8,14">11 (08,14) Screamer Generator (2)</a><br>
+<a href="?3,7,23">12 (07,23) Rockpile Generator (1)</a><br>
+<a href="?3,4,23">13 (04,23) Magenta Worm Generator (2)</a><br>
+<a href="?3,4,15">14 (04,15) Magenta Worm Generator (2)</a><br>
+<a href="?3,0,17">15 (00,17) Screamer Generator (1-4)</a><br>
+<a href="?3,1,15">16 (01,15) Screamer (4)</a><br>
+<a href="?3,7,5">17 (07,05) Mummy</a><br>
+<a href="?3,2,1">18 (02,01) Magenta Worm (2)</a><br>
+<a href="?3,3,1">19 (03,01) Magenta Worm (2)</a><br>
+<a href="?3,5,1">20 (05,01) Magenta Worm (2)</a><br>
+<a href="?3,6,1">21 (06,01) Magenta Worm (2)</a>
+</p>
+</div>
+<div id="lv4">
+<p>ITEMS</p>
+<p>
+<a href="?4,18,16">01 (18,16) Torch</a><br>
+<a href="?4,12,19">02 (12,19) Mirror Of Dawn</a><br>
+<a href="?4,12,14">03 (12,14) Poison Dart</a><br>
+<a href="?4,10,27">04 (10,27) Gold Coin, Rabbit's Foot #3</a><br>
+<a href="?4,8,27">05 (08,27) Blue Gem, Helmet</a><br>
+<a href="?4,7,27">06 (07,27) Poison Dart (2)</a><br>
+<a href="?4,20,19">07 (20,19) Gold Coin</a><br>
+<a href="?4,17,28">08 (17,28) Ekkhard Cross</a><br>
+<a href="?4,17,29">09 (17,29) Blue Gem, Mace</a><br>
+<a href="?4,29,27">10 (29,27) Gem Of Ages</a><br>
+<a href="?4,32,28">11 (32,28) Dagger</a><br>
+<a href="?4,32,29">12 (32,29) Hosen, Leg Mail, Mail Aketon, Helmet</a><br>
+<a href="?4,33,12">13 (33,12) Corn, Choker</a><br>
+<a href="?4,30,6">14 (30,06) Casque'n Coif</a><br>
+<a href="?4,33,3">15 (33,03) Staff Of Claws</a><br>
+<a href="?4,28,10">16 (28,10) Illumulet</a><br>
+<a href="?4,25,4">17 (25,04) Large Shield</a><br>
+<a href="?4,26,6">18 (26,06) Drumstick, Torch</a><br>
+<a href="?4,16,8">19 (16,08) Drumstick</a><br>
+<a href="?4,14,8">20 (14,08) Ven Potion</a><br>
+<a href="?4,14,7">21 (14,07) Ven Potion (2)</a><br>
+<a href="?4,12,10">22 (12,10) Chest [Bro Potion, Magical Box (Blue), Ful Bomb]</a><br>
+<a href="?4,10,7">23 (10,07) Blue Gem, Dane Potion</a><br>
+<a href="?4,14,3">24 (14,03) Ku Potion</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?4,17,12">I01 (17,12) "Treasure stores"</a><br>
+<a href="?4,13,27">I02 (13,27) "Store rooms"</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?4,15,17">A. (15,17) Take teleporters with letters alphabetically.</a><br>
+<a href="?4,20,10">B. (20,10) Directions to go through the room:<br>N E E W E N W N E W E N N E to go from (20,10) to (23,05)<br>W W W S S(!) S W W N S N N N W to go from (23,05) to (17,05)<br>E S S S S E E S to go from (17,05) to (20,10)</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?4,5,17">01 (05,17) Swamp Slime Generator (1)</a><br>
+<a href="?4,20,14">02 (20,14) Swamp Slime</a><br>
+<a href="?4,21,16">03 (21,16) Screamer (2)</a><br>
+<a href="?4,12,23">04 (12,23) Couatl</a><br>
+<a href="?4,17,18">05 (17,18) Swamp Slime [Ven Potion]</a><br>
+<a href="?4,31,27">06 (31,27) Swamp Slime</a><br>
+<a href="?4,33,16">07 (33,16) Couatl</a><br>
+<a href="?4,29,9">08 (29,09) Swamp Slime (2)</a><br>
+<a href="?4,27,4">09 (27,04) Couatl</a><br>
+<a href="?4,27,10">10 (27,10) Couatl</a><br>
+<a href="?4,24,5">11 (24,05) Swamp Slime</a><br>
+<a href="?4,17,5">12 (17,05) Couatl Generator (1)</a><br>
+<a href="?4,13,10">13 (13,10) Couatl</a><br>
+<a href="?4,11,2">14 (11,02) Swamp Slime</a>
+</p>
+</div>
+<div id="lv5">
+<p>ITEMS</p>
+<p>
+<a href="?5,22,05">01 (22,05) Drumstick</a><br>
+<a href="?5,16,6">02 (16,06) Cheese, Bro Potion</a><br>
+<a href="?5,12,7">03 (12,07) Ven Potion</a><br>
+<a href="?5,14,7">04 (14,07) Torch</a><br>
+<a href="?5,17,24">05 (17,24) Iron Key</a><br>
+<a href="?5,18,34">06 (18,34) Iron Key</a><br>
+<a href="?5,26,26">07 (26,26) Iron Key, Mail Aketon</a><br>
+<a href="?5,26,21">08 (26,21) Iron Key</a><br>
+<a href="?5,15,21">09 (15,21) Large Shield</a><br>
+<a href="?5,27,28">10 (27,28) Ros Potion, Vi Potion, Drumstick, Torch</a><br>
+<a href="?5,34,33">11 (34,33) Magical Box (Blue)</a><br>
+<a href="?5,34,19">12 (34,19) Iron Key, Torso Plate</a><br>
+<a href="?5,28,15">13 (28,15) Magical Box (Green)</a><br>
+<a href="?5,29,11">14 (29,11) Drumstick (2)</a><br>
+<a href="?5,28,10">15 (28,10) Yew Staff</a><br>
+<a href="?5,32,9">16 (32,09) Casque'n Coif</a><br>
+<a href="?5,29,5">17 (29,05) Vorpal Blade #1</a><br>
+<a href="?5,25,8">18 (25,08) Solid Key</a><br>
+<a href="?5,22,11">19 (22,11) Corn, Throwing Star (2)</a><br>
+<a href="?5,18,17">20 (18,17) Drumstick</a><br>
+<a href="?5,18,18">21 (18,18) Mithral Aketon, Slayer (2)</a><br>
+<a href="?5,11,15">22 (11,15) Magical Box (Green) (2)</a><br>
+<a href="?5,9,17">23 (09,17) Torch</a><br>
+<a href="?5,6,11">24 (06,11) Magical Box (Blue)</a><br>
+<a href="?5,12,21">25 (12,21) Vorpal Blade #2</a><br>
+<a href="?5,16,30">26 (16,30) Crossbow</a><br>
+<a href="?5,14,33">27 (14,33) Chest [Slayer, Water Flask, Drumstick]</a><br>
+<a href="?5,24,32">28 (24,32) Mithral Mail</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?5,12,25">I01 (12,25) "The riddle room"</a><br>
+<a href="?5,13,23">I02 (13,23) "I am all I am none"</a><br>
+<a href="?5,16,23">I03 (16,23) "A golden head and tail but no body"</a><br>
+<a href="?5,13,27">I04 (13,27) "Hard as rocks blue as sky twinkle in womans eye"</a><br>
+<a href="?5,16,27">I05 (16,27) "I arch yet have no back"</a><br>
+<a href="?5,22,26">I06 (22,26) "The grave of king Filius explorer of combinations"</a><br>
+<a href="?5,24,22">I07 (24,22) "The grave of king Milias the golden who even"</a><br>
+<a href="?5,24,23">I08 (24,23) "In death thirsts for bullion."</a><br>
+<a href="?5,25,18">I09 (25,18) "If you want to stay alive you better turn and run"</a><br>
+<a href="?5,25,17">I10 (25,17) "I hate cowards"</a><br>
+<a href="?5,25,19">I11 (25,19) "I don't like to be ignored"</a><br>
+<a href="?5,23,14">I12 (23,14) "Test your strength"</a><br>
+<a href="?5,19,9">I13 (19,09) "Ha ha ha"</a><br>
+<a href="?5,30,33">I14 (30,33) "Altar of Vi"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?5,22,23">L01 (22,23) Gold Coin</a><br>
+<a href="?5,20,19">L02 (21,18) Iron Key</a><br>
+<a href="?5,22,19">L03 (23,18) Iron Key</a><br>
+<a href="?5,27,17">L04 (27,17) Iron Key</a><br>
+<a href="?5,30,16">L05 (30,16) Iron Key</a><br>
+<a href="?5,25,13">L06 (25,13) Solid Key</a><br>
+<a href="?5,13,16">L07 (13,16) Iron Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?5,13,25">A. (13,25) Each of the four alcoves requires one of these four items: a Mirror Of Dawn, a Gold Coin, a Blue Gem and a Bow. Once three items are in place, the door will open. The fourth item will reveal the hidden alcove.</a><br>
+<a href="?5,18,31">B. (18,31) Pull the lever, then put any item on ground in the teleporter (do not throw it) so that it gets at (20,33). The door will then open.</a><br>
+<a href="?5,23,26">C. You need to press the two buttons at (24,25) and (25,28) to open the wall. The two other buttons are already in the correct state.</a><br>
+<a href="?5,29,26">D. A skeleton must walk on the pressure pad to open the wall. Leaving an item on floor will not work.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?5,13,7">01 (13,07) Skeleton</a><br>
+<a href="?5,18,34">02 (18,34) Wizard Eye</a><br>
+<a href="?5,23,27">03 (23,27) Wizard Eye</a><br>
+<a href="?5,23,22">04 (23,22) Skeleton (2)</a><br>
+<a href="?5,30,23">05 (30,23) Skeleton Generator (4)</a><br>
+<a href="?5,34,22">06 (34,22) Wizard Eye Generator (2)</a><br>
+<a href="?5,34,20">07 (34,20) Skeleton (2)</a><br>
+<a href="?5,29,7">08 (29,07) Skeleton (4)</a><br>
+<a href="?5,11,15">09 (11,15) Giant Wasp (3)</a><br>
+<a href="?5,11,10">10 (11,10) Skeleton (2)</a><br>
+<a href="?5,5,11">11 (05,11)-(06,12) Wizard Eye (4)</a><br>
+<a href="?5,5,24">12 (05,24) Wizard Eye Generator (1-4)</a><br>
+<a href="?5,9,25">13 (09,25) Skeleton (2)</a><br>
+<a href="?5,11,21">14 (11,21) Skeleton (4)</a><br>
+<a href="?5,12,19">15 (12,19) Skeleton</a><br>
+<a href="?5,11,27">16 (11,27) Skeleton (4)</a><br>
+<a href="?5,11,23">17 (11,23) Skeleton (2)</a><br>
+<a href="?5,12,33">18 (12,33) Skeleton Generator (1-4)</a><br>
+<a href="?5,15,33">19 (15,33) Giant Wasp Generator (1)</a><br>
+<a href="?5,16,32">20 (16,32) Skeleton Generator (1)</a><br>
+<a href="?5,23,33">21 (23,33) Wizard Eye</a>
+</p>
+</div>
+<div id="lv6">
+<p>ITEMS</p>
+<p>
+<a href="?6,27,32">01 (27,32) Magical Box (Green)</a><br>
+<a href="?6,33,28">02 (33,28) Scroll ("Fireball Ful Ir. Fire Shield Ful Bro Neta.")</a><br>
+<a href="?6,33,29">03 (33,29) Apple, Corn, Scroll ("Light Oh Ir Ra. Darkness Des Ir Sar.")</a><br>
+<a href="?6,31,25">04 (31,25) Scroll ("The keys to passage lie hidden deep.")</a><br>
+<a href="?6,9,20">05 (09,20) Magical Box (Green)</a><br>
+<a href="?6,9,23">06 (09,23) Ven Potion, Ful Bomb, The Inquisitor</a><br>
+<a href="?6,9,7">07 (09,07) Empty Flask (3)</a><br>
+<a href="?6,10,7">08 (10,07) Scroll (3) ("Neither Chaos nor Order is truly balanced", "The Firestaff can restore balance or destroy it.", "The power gem is sealed in the mountain by a strange magical force.")</a><br>
+<a href="?6,10,6">09 (10,06) Orange Gem, Corbamite, Magnifier</a><br>
+<a href="?6,14,8">10 (14,08) Torch</a><br>
+<a href="?6,18,8">11 (18,08) Boulder, Rock</a><br>
+<a href="?6,22,8">12 (22,08) Empty Flask</a><br>
+<a href="?6,26,8">13 (26,08) Water Flask</a><br>
+<a href="?6,29,8">14 (29,08) Scroll ("Balance is the ultimate good")</a><br>
+<a href="?6,31,9">15 (31,09) Ashes, Tourquoise Key</a><br>
+<a href="?6,33,12">16 (33,12) Ra Key, Scroll (5) ("I fear for the people of the world should the power gem and the Firestaff get in the wrong hands", "I have given the Firestaff much power. Power to do and undo. Power to break and mend.", "The Firestaff can contain a being of pure alignment with its fluxcage.", "Once fluxcaged a being can be transmuted by the power of the staff which should always be used for balance.", "Zokathra might create a plasma that could burn through the amalgam encasing the gem.")</a><br>
+<a href="?6,12,8">17 (12,08) Bolt Blade, Flamebain</a><br>
+<a href="?6,16,8">18 (16,08) Magical Box (Green), Crown Of Nerra</a><br>
+<a href="?6,20,8">19 (20,08) Boots Of Speed #4, Dragon Spit</a><br>
+<a href="?6,24,8">20 (24,08) Gem Of Ages, Illumulet, Sceptre Of Lyf</a><br>
+<a href="?6,5,6">21 (05,06) Winged Key</a><br>
+<a href="?6,19,20">22 (19,20) The Firestaff</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?6,31,28">I01 (31,28) "The tomb of The Firestaff"</a><br>
+<a href="?6,10,10">I02 (10,10) "Danger Enter with caution"</a><br>
+<a href="?6,9,8">I03 (09,08) "Clean flasks"</a><br>
+<a href="?6,10,8">I04 (10,08) "Notes scrolls formulas spells"</a><br>
+<a href="?6,9,6">I05 (09,06) "Sundry supplies"</a><br>
+<a href="?6,14,7">I06 (14,07) "Fire elements"</a><br>
+<a href="?6,18,7">I07 (18,07) "Earth elements"</a><br>
+<a href="?6,22,7">I08 (22,07) "Air elements"</a><br>
+<a href="?6,26,7">I09 (26,07) "Water elements"</a><br>
+<a href="?6,33,11">I10 (33,11) "Reading room Keep out".</a> This inscription is actually not visible in the game because it is disabled. You can view it in a dungeon editor.
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?6,32,28">L01 (32,28) Ra Key</a><br>
+<a href="?6,32,25">L02 (32,25) Ra Key</a><br>
+<a href="?6,32,20">L03 (32,20) Ra Key</a><br>
+<a href="?6,25,10">L04 (25,10) Tourquoise Key</a><br>
+<a href="?6,21,10">L05 (21,10) Tourquoise Key</a><br>
+<a href="?6,17,10">L06 (17,10) Tourquoise Key</a><br>
+<a href="?6,13,10">L07 (13,10) Tourquoise Key</a><br>
+<a href="?6,8,10">L08 (08,10) Ruby Key</a><br>
+<a href="?6,8,11">L09 (08,11) Ra Key</a><br>
+<a href="?6,17,21">L10 (17,21) Master Key</a><br>
+<a href="?6,21,21">L11 (21,21) Master Key</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?6,9,19">01 (09,19) Stone Golem</a><br>
+<a href="?6,9,22">02 (09,22) Stone Golem</a><br>
+<a href="?6,18,22">03 (18,22) Stone Golem</a><br>
+<a href="?6,20,22">04 (20,22) Stone Golem</a><br>
+<a href="?6,19,34">05 (19,34) Stone Golem</a>
+</p>
+</div>
+<div id="lv7">
+<p>ITEMS</p>
+<p>
+<a href="?7,34,38">01 (34,38) Torch</a><br>
+<a href="?7,35,39">02 (35,39) Scroll ("Four potions for boosting skills Ful Bro Ku Oh Bro Ros Ya Bro Dain Ya Bro Neta")</a><br>
+<a href="?7,36,39">03 (36,39) Copper Coin</a><br>
+<a href="?7,29,38">04 (29,38) Delta</a><br>
+<a href="?7,32,37">05 (32,37) Jewel Symal</a><br>
+<a href="?7,31,34">06 (31,34) Ful Bomb, Magical Box (Green)</a><br>
+<a href="?7,50,31">07 (50,31) Mace Of Order</a><br>
+<a href="?7,50,32">08 (50,32) Ful Bomb (2)</a><br>
+<a href="?7,50,17">09 (50,17) Staff Of Manar</a><br>
+<a href="?7,40,13">10 (40,13) Solid Key</a><br>
+<a href="?7,23,13">11 (23,13) Chest [Skeleton Key]</a><br>
+<a href="?7,26,28">12 (26,28) Ful Bomb, Rabbit's Foot #4</a><br>
+<a href="?7,22,22">13 (22,22) Cheese</a><br>
+<a href="?7,25,32">14 (25,32) Chest [Ya Potion, Scroll ("The spell Ya Bro Ros leaves a trail of magic footprints.")]</a><br>
+<a href="?7,21,19">15 (21,19) Apple (2)</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?7,22,22">L01 (22,22) Solid Key</a><br>
+<a href="?7,25,32">L02 (25,32) Skeleton Key</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?7,35,33">01 (35,33) Ghost</a><br>
+<a href="?7,37,30">02 (37,30) Ghost</a><br>
+<a href="?7,32,29">03 (32,29) Ghost</a><br>
+<a href="?7,34,28">04 (34,28) Ghost</a><br>
+<a href="?7,37,27">05 (37,27) Ghost</a><br>
+<a href="?7,33,26">06 (33,26) Skeleton Generator (1)</a><br>
+<a href="?7,39,36">07 (39,36) Ghost</a><br>
+<a href="?7,35,37">08 (35,37) Mummy (3)</a><br>
+<a href="?7,23,38">09 (23,38) Skeleton</a><br>
+<a href="?7,21,38">10 (21,38) Skeleton</a><br>
+<a href="?7,21,36">11 (21,36) Mummy (4)</a><br>
+<a href="?7,44,31">12 (44,31) Ghost Generator (1)</a><br>
+<a href="?7,50,30">13 (50,30) Mummy (4)</a><br>
+<a href="?7,42,25">14 (42,25) Ghost</a><br>
+<a href="?7,44,20">15 (44,20) Giggler [Throwing Star]</a><br>
+<a href="?7,50,18">16 (50,18) Mummy</a><br>
+<a href="?7,37,19">17 (37,19) Ghost Generator (1)</a><br>
+<a href="?7,34,23">18 (34,23) Ghost</a><br>
+<a href="?7,29,21">19 (29,21) Ghost</a><br>
+<a href="?7,32,17">20 (32,17) Giggler Generator (1)</a><br>
+<a href="?7,22,30">21 (22,30) Skeleton Generator (1-4)</a><br>
+<a href="?7,21,18">22 (21,18) Skeleton (4) [Magical Box (Green)]</a><br>
+<a href="?7,23,20">23 (23,20) Mummy Generator (1-4)</a>
+</p>
+</div>
+<div id="lv8">
+<p>ITEMS</p>
+<p>
+<a href="?8,35,25">01 (35,25) Vi Potion (2)</a><br>
+<a href="?8,22,28">02 (22,28) Scroll ("Lightning bolt Oh Kath Ra")</a><br>
+<a href="?8,35,28">03 (35,28) Torch, Apple</a><br>
+<a href="?8,31,30">04 (31,30) Magical Box (Blue)</a><br>
+<a href="?8,30,30">05 (30,30) Pendant Feral</a><br>
+<a href="?8,13,16">06 (13,16) Storm Ring, Torch, Drumstick</a><br>
+<a href="?8,40,05">07 (40,05) Vi Potion, Chest [Green Gem, Scroll ("Put the gem back...")]</a><br>
+<a href="?8,28,06">08 (28,06) Rope</a><br>
+<a href="?8,15,06">09 (15,06) Corbamite</a><br>
+<a href="?8,15,07">10 (15,07) Torch</a><br>
+<a href="?8,13,12">11 (13,12) Dragon Steak, Corn, Apple, Cheese</a><br>
+<a href="?8,30,19">12 (30,19) Empty flask, Scroll ("The spell Oh Ew Ra bestows magic vision.")</a><br>
+<a href="?8,23,22">13 (23,22) Ra Key</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?8,19,34">I01 (19,34) "When is rock not rock"</a><br>
+<a href="?8,28,10">I02 (28,10) "What is under foot is soon overhead"</a><br>
+<a href="?8,35,20">I03 (35,20) "Lighter than a feather"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?8,35,20">L01 (35,20) Corbamite</a><br>
+<a href="?8,26,30">L02 (26,30) Skeleton Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?8,21,15">A. "Put The Gem Back" puzzle: Use the lever twice to make the chest fall down the pit and close the pit again. Go downstairs from (08,22,10) and grab the chest. Get back upstairs then again upstairs from (08,23,16). Drop the Green Gem at (07,21,12). This will open the door at (08,21,13). Get back downstairs.<br>Another solution is to jump in the pit (or Climb Down with a rope) instead of dropping the Green Gem. Then use the green button to open the door.</a><br>
+<a href="?8,29,9">B. Place items on the pressure plates to trigger the fireballs, and quickly move out of their way. Once each pressure plate is triggered, you can walk across safely. If you play with only two champions, place them in front and turn sideways when the fireballs are shot so that they pass behind your champions.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?8,21,32">01 (21,32) Pain Rat Generator (1)</a><br>
+<a href="?8,27,35">02 (27,35) Ruster</a><br>
+<a href="?8,35,30">03 (35,30) Vexirk [Cheese, Corn]</a><br>
+<a href="?8,14,30">04 (14,30) Pain Rat</a><br>
+<a href="?8,14,19">05 (14,19) Pain Rat</a><br>
+<a href="?8,17,12">06 (17,12) Vexirk (2) [Screamer Slice, Bread, Apple, Corn, Cheese]</a><br>
+<a href="?8,26,14">07 (26,14) Ruster</a><br>
+<a href="?8,24,07">08 (24,07) Ruster</a><br>
+<a href="?8,12,06">09 (12,06) Vexirk [Skeleton Key]</a><br>
+<a href="?8,35,15">10 (35,15) Ruster</a><br>
+<a href="?8,35,05">11 (35,05) Pain Rat Generator (1)</a><br>
+<a href="?8,29,22">12 (29,22) Pain Rat</a>
+</p>
+</div>
+<div id="lv9">
+<p>ITEMS</p>
+<p>
+<a href="?9,30,25">01 (30,25) Yew Staff</a><br>
+<a href="?9,13,22">02 (13,22) Key Of B</a><br>
+<a href="?9,10,12">03 (10,12) Apple, Bread</a><br>
+<a href="?9,15,31">04 (15,31) Corn, Cheese</a><br>
+<a href="?9,35,27">05 (35,27) Cheese, Water Flask, Ful Bomb</a><br>
+<a href="?9,27,26">06 (27,26) Corn</a><br>
+<a href="?9,27,27">07 (27,27) Torch</a><br>
+<a href="?9,16,36">08 (16,36) Armet</a><br>
+<a href="?9,10,31">09 (10,31) Speedbow</a><br>
+<a href="?9,24,35">10 (24,35) Foot Plate, Leg Plate</a><br>
+<a href="?9,22,37">11 (22,37) Drumstick, Moonstone</a><br>
+<a href="?9,24,37">12 (24,37) Corn</a><br>
+<a href="?9,32,40">13 (32,40) Scroll ("Shield potion Ya Bro. Magic shield Ya Ir.")</a><br>
+<a href="?9,27,36">14 (27,36) Torso Plate, Ful Bomb</a><br>
+<a href="?9,25,36">15 (25,36) Boots Of Speed #1</a><br>
+<a href="?9,38,40">16 (38,40) Bread</a><br>
+<a href="?9,38,21">17 (38,21) Bread</a><br>
+<a href="?9,33,16">18 (33,16) Shield Of Lyte, Scroll ("Mana potion Zo Bro Ra creates a pure mana potion.")</a><br>
+<a href="?9,36,10">19 (36,10) Hardcleave</a><br>
+<a href="?9,28,13">20 (28,13) Magnifier</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?9,24,22">I01 (24,22) "Beware my twisted humor the deceiver the snake"</a><br>
+<a href="?9,13,22">I02 (13,22) "Choose a door"</a><br>
+<a href="?9,32,23">I03 (32,23) "Zooooom"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?9,13,21">L01 (13,21) Key Of B</a><br>
+<a href="?9,13,23">L02 (13,23) Key Of B</a><br>
+<a href="?9,29,22">L03 (29,22) Key Of B</a><br>
+<a href="?9,30,32">L04 (30,32) Skeleton Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?9,15,33">A. (15,33) Creatures in this room are kept in place by invisible teleporters. Some of them are disabled by pressing the button at (16,33) or by walking at (11,41).</a><br>
+<a href="?9,32,23">B. When you reach a corner of the Zooooom, you are teleported one step forward and turned 90 degrees. So if you enter the Zooooom forward, you have to step out of it with a step to the right.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?9,15,22">01 (15,22) Wizard Eye Generator (1-4)</a><br>
+<a href="?9,13,21">02 (13,21) Skeleton</a><br>
+<a href="?9,17,16">03 (17,16) Giggler</a><br>
+<a href="?9,20,17">04 (20,17) Wizard Eye (3) [Key Of B]</a><br>
+<a href="?9,13,27">05 (13,27) Skeleton (4) [Key Of B]</a><br>
+<a href="?9,18,27">06 (18,27) Giant Scorpion</a><br>
+<a href="?9,25,31">07 (25,31) Wizard Eye (2)</a><br>
+<a href="?9,10,33">08 (10,33) Skeleton (4)</a><br>
+<a href="?9,10,34">09 (10,34) Giggler (2)</a><br>
+<a href="?9,15,35">10 (15,35) Wizard Eye</a><br>
+<a href="?9,15,36">11 (15,36) Skeleton</a><br>
+<a href="?9,15,37">12 (15,37) Wizard Eye</a><br>
+<a href="?9,14,38">13 (14,38) Wizard Eye</a><br>
+<a href="?9,13,39">14 (13,39) Skeleton</a><br>
+<a href="?9,14,39">15 (14,39) Wizard Eye</a><br>
+<a href="?9,12,41">16 (12,41) Giggler Generator (1)</a><br>
+<a href="?9,23,34">17 (23,34) Giggler</a><br>
+<a href="?9,26,39">18 (26,39) Giggler Generator (1)</a><br>
+<a href="?9,28,41">19 (28,41) Giant Scorpion</a><br>
+<a href="?9,33,40">20 (33,40) Skeleton</a><br>
+<a href="?9,39,28">21 (39,28) Giant Scorpion</a><br>
+<a href="?9,37,25">22 (37,25) Wizard Eye Generator (1-4)</a><br>
+<a href="?9,35,19">23 (35,19) Giggler</a><br>
+<a href="?9,31,17">24 (31,17) Giant Scorpion Generator (1)</a><br>
+<a href="?9,33,16">25 (33,16) Wizard Eye [Skeleton Key]</a><br>
+<a href="?9,27,13">26 (27,13) Giant Scorpion</a><br>
+<a href="?9,21,15">27 (21,15) Giggler</a>
+</p>
+</div>
+<div id="lv10">
+<p>ITEMS</p>
+<p>
+<a href="?10,13,13">01 (13,13) Staff</a><br>
+<a href="?10,16,10">02 (16,10) Iron Key</a><br>
+<a href="?10,16,13">03 (16,13) Foot Plate</a><br>
+<a href="?10,16,16">04 (16,16) Morningstar</a><br>
+<a href="?10,13,16">05 (13,16) Sabre</a><br>
+<a href="?10,21,16">06 (21,16) Chest [Solid Key]</a><br>
+<a href="?10,11,24">07 (11,24) Diamond Edge</a><br>
+<a href="?10,22,13">08 (22,13) Fury</a><br>
+<a href="?10,35,14">09 (35,14) Skeleton Key</a><br>
+<a href="?10,29,21">10 (29,21) Cross Key</a><br>
+<a href="?10,17,25">11 (17,25) Copper Coin</a><br>
+<a href="?10,12,28">12 (12,28) Copper Coin</a><br>
+<a href="?10,28,26">13 (28,26) Cheese</a><br>
+<a href="?10,21,29">14 (21,29) Copper Coin</a><br>
+<a href="?10,16,32">15 (16,32) Copper Coin</a><br>
+<a href="?10,38,14">16 (38,14) Copper Coin</a><br>
+<a href="?10,32,24">17 (32,24) Drumstick</a><br>
+<a href="?10,36,30">18 (36,30) Copper Coin</a><br>
+<a href="?10,10,41">19 (10,41) Plate Of Lyte, Poleyn Of Lyte, Greave Of Lyte</a><br>
+<a href="?10,36,38">20 (36,38) Ven Potion</a><br>
+<a href="?10,36,38">21 (36,38) Ful Bomb</a><br>
+<a href="?10,36,37">22 (36,37) Ful Bomb, Magical Box (Green)</a><br>
+<a href="?10,36,37">23 (36,37) Copper Coin (2)</a><br>
+<a href="?10,37,37">24 (37,37) Cross Key</a><br>
+<a href="?10,37,37">25 (37,37) Chest [Drumstick (4), Cheese (2), Bread (2)]</a><br>
+<a href="?10,37,38">26 (37,38) Magical Box (Green)</a><br>
+<a href="?10,34,36">27 (34,36) Boots Of Speed #2</a><br>
+<a href="?10,26,35">28 (26,35) Scroll ("The only way out is another way in.")</a><br>
+<a href="?10,32,30">29 (32,30) Ruby Key</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?10,10,13">I01 (10,13) "Turn back"</a><br>
+<a href="?10,19,10">I02 (19,10) "Clockwise"</a><br>
+<a href="?10,30,35">I03 (30,35) "Enlarge my view"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?10,10,16">L00 (10,16) Solid Key</a><br>
+<a href="?10,19,16">L01 (19,16) Iron Key</a><br>
+<a href="?10,27,22">L02 (27,22) Cross Key</a><br>
+<a href="?10,31,22">L03 (31,22) Cross Key</a><br>
+<a href="?10,28,22">L04 (28,22) Cross Key</a><br>
+<a href="?10,30,34">L05 (30,34) Skeleton Key</a><br>
+<a href="?10,30,34">L06 (30,34) Magnifier (In fact, any item will open this lock because the dungeon designer either made a mistake or thought it was too hard to find the Magnifier)</a><br>
+<a href="?10,36,37">L07-13 (36,37)-(37,38) Copper Coin (7)</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?10,10,21">01 (10,21) Giant Wasp</a><br>
+<a href="?10,11,22">02 (11,22) Giant Wasp</a><br>
+<a href="?10,12,21">03 (12,21) Giant Wasp</a><br>
+<a href="?10,13,22">04 (13,22) Giant Wasp</a><br>
+<a href="?10,20,22">05 (20,22) Giggler</a><br>
+<a href="?10,29,20">06 (29,20) Giant Wasp (2)</a><br>
+<a href="?10,24,23">07 (24,23) Trolin (2)</a><br>
+<a href="?10,19,25">08 (19,25) Trolin (4)</a><br>
+<a href="?10,16,26">09 (16,26) Trolin</a><br>
+<a href="?10,17,29">10 (17,29) Trolin (4)</a><br>
+<a href="?10,13,26">11 (13,26) Trolin Generator (1-4)</a><br>
+<a href="?10,14,28">12 (14,28) Giggler</a><br>
+<a href="?10,13,30">13 (13,30) Trolin (4)</a><br>
+<a href="?10,10,30">14 (10,30) Trolin (3)</a><br>
+<a href="?10,14,35">15 (14,35) Trolin (4)</a><br>
+<a href="?10,26,25">16 (26,25) Water Elemental</a><br>
+<a href="?10,20,29">17 (20,29) Giggler</a><br>
+<a href="?10,16,32">18 (16,32) Water Elemental Generator (1)</a><br>
+<a href="?10,33,22">19 (33,22) Giggler</a><br>
+<a href="?10,37,19">20 (37,19) Giant Wasp (2)</a><br>
+<a href="?10,39,13">21 (39,13) Giant Wasp Generator (2)</a><br>
+<a href="?10,37,22">22 (37,22) Giggler</a><br>
+<a href="?10,35,24">23 (35,24) Giant Wasp</a><br>
+<a href="?10,38,29">24 (38,29) Giggler</a><br>
+<a href="?10,35,30">25 (35,30) Giant Wasp Generator (2)</a><br>
+<a href="?10,32,28">26 (32,28) Giant Wasp</a><br>
+<a href="?10,17,38">27 (17,38) Water Elemental</a><br>
+<a href="?10,27,39">28 (27,39) Giant Wasp Generator (2)</a>
+</p>
+</div>
+<div id="lv11">
+<p>ITEMS</p>
+<p>
+<a href="?11,20,46">01 (20,46) Snake Staff</a><br>
+<a href="?11,36,50">02 (36,50) Corn, Bread</a><br>
+<a href="?11,38,48">03 (38,48) Drumstick</a><br>
+<a href="?11,39,41">04 (39,41) Topaz Key</a><br>
+<a href="?11,21,42">05 (21,42) Ra Key</a><br>
+<a href="?11,39,35">06 (39,35) Torch, Apple, Drumstick</a><br>
+<a href="?11,43,48">07 (43,48) Poleyn Of Darc</a><br>
+<a href="?11,41,48">08 (41,48) Plate Of Darc</a><br>
+<a href="?11,49,50">09 (49,50) Greave Of Darc</a><br>
+<a href="?11,50,48">10 (50,48) Shield Of Darc</a><br>
+<a href="?11,48,27">11 (48,27) Ya Potion, Vi Potion, Water Flask, Apple, Scroll ("Invisibility Oh Ew Sar")</a><br>
+<a href="?11,49,22">12 (49,22) Drumstick, Slayer, Apple</a><br>
+<a href="?11,47,20">13 (47,20) Ful Bomb</a><br>
+<a href="?11,48,20">14 (48,20) Helm Of Darc</a><br>
+<a href="?11,49,20">15 (49,20) Skeleton Key</a><br>
+<a href="?11,21,33">16 (21,33) Apple</a><br>
+<a href="?11,27,24">17 (27,24) Corn (2)</a><br>
+<a href="?11,23,22">18 (23,22) Morningstar</a><br>
+<a href="?11,41,32">19 (41,32) Ful Bomb</a><br>
+<a href="?11,47,32">20 (47,32) Ven Potion</a><br>
+<a href="?11,43,33">21 (43,33) Helm Of Lyte</a><br>
+<a href="?11,43,34">22 (43,34) Apple</a><br>
+<a href="?11,44,34">23 (44,34) Boots Of Speed #3</a><br>
+<a href="?11,32,32">24 (32,32) Master Key</a>
+</p>
+<p>INSCRIPTIONS</p>
+<p>
+<a href="?11,44,30">I01 (44,30) "Cowards will be hunted down and killed"</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?11,25,46">L01 (25,46) Topaz Key</a><br>
+<a href="?11,24,42">L02 (24,42) Emerald Key</a><br>
+<a href="?11,30,37">L03 (30,37) Skeleton Key</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?11,31,48">01 (31,48) Materializer</a><br>
+<a href="?11,36,42">02 (36,42) Materializer</a><br>
+<a href="?11,39,41">03 (39,41) Animated Armour</a><br>
+<a href="?11,29,43">04 (29,43) Animated Armour [Emerald Key]</a><br>
+<a href="?11,44,38">05 (44,38) Oitu</a><br>
+<a href="?11,50,38">06 (50,38) Materializer (2)</a><br>
+<a href="?11,45,49">07 (45,49) Materializer (4)</a><br>
+<a href="?11,48,26">08 (48,26) Animated Armour</a><br>
+<a href="?11,48,22">09 (48,22) Animated Armour (2)</a><br>
+<a href="?11,20,32">10 (20,32) Oitu</a><br>
+<a href="?11,20,24">11 (20,24) Animated Armour (2)</a><br>
+<a href="?11,36,21">12 (36,21) Oitu Generator (1)</a><br>
+<a href="?11,41,31">13 (41,31) Oitu Generator (1)</a><br>
+<a href="?11,47,31">14 (47,31) Oitu Generator (1)</a><br>
+<a href="?11,42,32">15 (42,32) Oitu</a><br>
+<a href="?11,46,32">16 (46,32) Oitu</a><br>
+<a href="?11,43,33">17 (43,33) Oitu</a><br>
+<a href="?11,44,33">18 (44,33) Oitu</a><br>
+<a href="?11,45,33">19 (45,33) Oitu</a><br>
+<a href="?11,35,26">20 (35,26) Materializer Generator (1-4)</a>
+</p>
+</div>
+<div id="lv12">
+<p>ITEMS</p>
+<p>
+<a href="?12,43,31">01 (43,31) Flamitt, The Hellion</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?12,25,38">L01 (25,38) Skeleton Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?12,35,41">A. (35,41) Lord Chaos cannot be killed by using normal weapons and spells. You must use The Firestaff (completed with the power gem from Level 13) as follow:<br><br>
+- Use War Cry to "push" Lord Chaos into a corner,<br>
+- Block him by using the Fluxcage spell of The Firestaff all around him except on the space he is standing.<br>
+- Use the Fuse spell of The Firestaff on Lord Chaos.<br><br>
+The easiest way to Fuse Lord Chaos is to enter the small room at (43,31), close the doors and sleep. Lord Chaos will teleport himself into the room and wake you. You just have to make two fluxcages before you can fuse him.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?12,27,48">01 (27,48) Black Flame Generator (1)</a><br>
+<a href="?12,32,31">02 (32,31) Black Flame Generator (1)</a><br>
+<a href="?12,37,40">03 (37,40) Black Flame Generator (1)</a><br>
+<a href="?12,38,40">04 (38,40) Black Flame Generator (1)</a><br>
+<a href="?12,39,40">05 (39,40) Black Flame Generator (1)</a><br>
+<a href="?12,37,42">06 (37,42) Black Flame Generator (1)</a><br>
+<a href="?12,38,42">07 (38,42) Black Flame Generator (1)</a><br>
+<a href="?12,38,47">08 (38,47) Demon</a><br>
+<a href="?12,43,46">09 (43,46) Black Flame</a><br>
+<a href="?12,43,41">10 (43,41) Black Flame Generator (1)</a><br>
+<a href="?12,44,40">11 (44,40) Black Flame Generator (1)</a><br>
+<a href="?12,45,39">12 (45,39) Black Flame Generator (1)</a><br>
+<a href="?12,42,39">13 (42,39) Demon (2)</a><br>
+<a href="?12,44,35">14 (44,35) Demon (2)</a><br>
+<a href="?12,44,34">15 (44,34) Black Flame Generator (1)</a><br>
+<a href="?12,39,33">16 (39,33) Black Flame</a><br>
+<a href="?12,40,30">17 (40,30) Lord Chaos</a><br>
+<a href="?12,44,30">18 (44,30) Demon</a>
+</p>
+</div>
+<div id="lv13">
+<p>ITEMS</p>
+<p>
+<a href="?13,34,42">01 (34,42) Copper Coin</a><br>
+<a href="?13,35,39">02 (35,39) Silver Coin</a><br>
+<a href="?13,35,43">03 (35,43) Silver Coin</a><br>
+<a href="?13,37,38">04 (37,38) Copper Coin</a><br>
+<a href="?13,37,42">05 (37,42) Boulder</a><br>
+<a href="?13,37,44">06 (37,44) Copper Coin</a><br>
+<a href="?13,38,41">07 (38,41) Silver Coin, Boulder</a><br>
+<a href="?13,39,40">08 (39,40) Ashes</a><br>
+<a href="?13,40,39">09 (40,39) Boulder</a><br>
+<a href="?13,40,42">10 (40,42) Copper Coin</a><br>
+<a href="?13,41,41">11 (41,41) Ashes</a><br>
+<a href="?13,42,42">12 (42,42) Ashes</a><br>
+<a href="?13,43,40">13 (43,40) Square Key, Ashes</a><br>
+<a href="?13,43,43">14 (43,43) Boulder</a><br>
+<a href="?13,44,39">15 (44,39) Boulder</a><br>
+<a href="?13,44,42">16 (44,42) Ashes</a><br>
+<a href="?13,44,43">17 (44,43) Ashes</a><br>
+<a href="?13,45,40">18 (45,40) Ashes</a><br>
+<a href="?13,47,40">19 (47,40) Copper Coin (3), Gold Coin, Calista</a><br>
+<a href="?13,47,42">20 (47,42) Blue Gem, Green Gem (2), Eye Of Time</a><br>
+<a href="?13,48,38">21 (48,38) Silver Coin</a><br>
+<a href="?13,49,36">22 (49,36) Scroll ("Only the touch of the proper spell will free the gem and only the Firestaff can possess it.")</a><br>
+<a href="?13,48,33">23 (48,33) Copper Coin</a>
+</p>
+<p>LOCKS</p>
+<p>
+<a href="?13,48,41">L01 (48,41) Square Key</a><br>
+<a href="?13,48,38">L02 (48,38) Gold Coin (2), Silver Coin</a><br>
+<a href="?13,28,41">L03 (28,41) Winged Key</a>
+</p>
+<p>NOTES</p>
+<p>
+<a href="?13,49,36">A. (49,36) Cast the spell Zo Kath Ra. Use the spell to free the power gem, then use the Firestaff on it to combine them.<br>Getting out of this room with the complete Firestaff will activate the pressure pad at (49,39), which toggles two walls on level 12 preventing you from going to the upper levels. You can avoid that by throwing the complete Firestaff through the door to the south before stepping on the pressure plate.</a>
+</p>
+<p>CREATURES</p>
+<p>
+<a href="?13,49,41">01 (49,41) Red Dragon</a>
+</p>
+</div>
+<p><a href="http://dmweb.free.fr/">text and maps: dmweb.free.fr</a>, <a href="?14,0,0">javascript: 3dh</a> (gmail: 3dh.net)</p>
+</div>
+<script>
+var lv=Number(getUrlVars()[0]);
+document.getElementById('mapa').style.backgroundPosition='-'+(lv*477)+'px 0px';
+if(lv==0){var lvw=18;var lvh=19;var lvx=-1;var lvy=-1;}
+if(lv==1){var lvw=32;var lvh=46;var lvx=-1;var lvy=13;}
+if(lv==2){var lvw=37;var lvh=42;var lvx=4;var lvy=9;}
+if(lv==3){var lvw=32;var lvh=32;var lvx=-1;var lvy=-1;}
+if(lv==4){var lvw=35;var lvh=31;var lvx=4;var lvy=-1;}
+if(lv==5){var lvw=36;var lvh=37;var lvx=4;var lvy=4;}
+if(lv==6){var lvw=35;var lvh=36;var lvx=4;var lvy=4;}
+if(lv==7){var lvw=52;var lvh=43;var lvx=19;var lvy=10;}
+if(lv==8){var lvw=43;var lvh=37;var lvx=11;var lvy=4;}
+if(lv==9){var lvw=41;var lvh=42;var lvx=9;var lvy=9;}
+if(lv==10){var lvw=40;var lvh=42;var lvx=9;var lvy=9;}
+if(lv==11){var lvw=52;var lvh=51;var lvx=19;var lvy=19;}
+if(lv==12){var lvw=47;var lvh=50;var lvx=24;var lvy=29;}
+if(lv==13){var lvw=51;var lvh=45;var lvx=24;var lvy=31;}
+if(lv>=14){var lvw=0;var lvh=0;var lvx=1;var lvy=1;}
+
+document.getElementById('txt').style.top=((lvh-lvy+1)*14)+5+'px';
+
+for (var i=0; i<=13; ++i){
+if(lv>=0&&lv<=13){document.title='DM Level '+lv;document.getElementById('lv'+lv).style.display='block';}
+else{document.title='Dungeon Master Compendium';document.getElementById('lv'+i).style.display='block';}
+}
+
+LoadCoordinates(lv,Number(getUrlVars()[1]),Number(getUrlVars()[2]));
+</script>
+
+</body>
+</html>
