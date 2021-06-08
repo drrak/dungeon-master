@@ -18,3 +18,6 @@ Prison (shown as levels 10 and 11): https://drrak.github.io/dungeon-master/csb/?
 Dungeon: https://drrak.github.io/dungeon-master/csb/?4,31,26
 
 List of everything: https://drrak.github.io/dungeon-master/csb/?12,0,0
+
+<br/>
+Source: http://dmweb.free.fr/?q=node/1517
